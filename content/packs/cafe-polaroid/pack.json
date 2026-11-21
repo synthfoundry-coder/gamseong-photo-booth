@@ -1,0 +1,44 @@
+{
+  "slug": "cafe-polaroid",
+  "title": "Warm Cafe Polaroid",
+  "titleKo": "카페 폴라로이드",
+  "subtitle": "Single instant Polaroid cut with cozy analog film warmth and a thick white signature border.",
+  "format": "polaroid",
+  "formatLabel": "Single Polaroid",
+  "formatLabelKo": "폴라로이드",
+  "cuts": 1,
+  "tags": ["Film", "Cozy", "Minimal"],
+  "isNew": false,
+  "isSample": true,
+  "premium": false,
+  "previewImage": "/assets/packs/cafe-polaroid/preview.png",
+  "previewWidth": 800,
+  "previewHeight": 1000,
+  "aspectClass": "polaroid",
+  "requiredFiles": [
+    {
+      "id": "strip-template",
+      "label": "Polaroid Border Frame Guide",
+      "roleDescription": "single Polaroid aspect ratio and thick bottom border guide",
+      "path": "/assets/packs/cafe-polaroid/files/strip-template-polaroid.png",
+      "filename": "strip-template-polaroid.png"
+    }
+  ],
+  "allowed": {
+    "headwear": ["cream-beret", "bunny-ears", "pink-bandana"],
+    "eyewear": ["round-glasses", "heart-glasses"],
+    "accessory": ["mini-bouquet", "bear-mittens"],
+    "backdrops": ["butter-yellow", "mint-cream", "strawberry-milk", "doodle-hearts", "gingham-pink"],
+    "poses": ["chic-editorial", "cute-classic", "heart-overload"],
+    "moods": ["warm-film", "soft-studio", "classic-bw", "dreamy-pastel"]
+  },
+  "defaults": {
+    "headwear": "cream-beret",
+    "eyewear": "round-glasses",
+    "accessory": null,
+    "backdrop": "butter-yellow",
+    "pose": "chic-editorial",
+    "mood": "warm-film"
+  },
+  "template": "Create a single realistic Korean instant Polaroid portrait photo.\n\nReference files attached:\n{attachments.list}\n\nIdentity & framing:\n- Keep the exact face, features, and hair of the person in Image 1 (my selfie).\n- Match the instant Polaroid frame proportions, wide bottom white border, and subtle \"GAMSEONG PHOTO\" caption from {file.strip-template}.\n\nStyling & props:\n- {props.sentence}\n\nBackdrop & pose:\n- Studio backdrop: {backdrop.full}.\n- Pose: {pose.text} (adapt naturally for a single close-up chest-up portrait).\n\nLighting & finish:\n- {mood.text}.\n- Authentic instant camera photography with gentle paper sheen on the border, natural skin, clean composition."
+}

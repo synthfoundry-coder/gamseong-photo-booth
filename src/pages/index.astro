@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PackGallery from '../components/PackGallery';
+import { loadAllPacks } from '../lib/content';
+
+const packs = loadAllPacks();
+const featuredPack = packs[0];
+---
+
+<BaseLayout
+  title="GAMSEONG PHOTO (감성네컷) · Korean Photo-Booth Prompt Packs for Gemini"
+  description="Browse Korean Life4Cuts, Polaroid, and Haru Film prompt packs. Customize props, backdrops, poses, and moods with visual cards, then download your numbered reference kit for the free Gemini app."
+  ogImage={featuredPack?.previewImage ?? '/assets/packs/bunny-4cut/preview.png'}
+  currentPath="/"
+>
+  <div class="mx-auto max-w-6xl px-4 pb-8 pt-8 sm:px-6 sm:pt-12">
+    <!-- Asymmetric Hero: editorial copy left, real booth strip showcase right -->
+    <section class="grid grid-cols-1 items-center gap-8 pb-12 md:grid-cols-12 md:gap-10 md:pb-16">
+      <div class="md:col-span-7">
+        <h1 class="text-[clamp(2rem,4.8vw,3.4rem)] font-extrabold leading-[1.08] tracking-tight text-[var(--ink)]">
+          Korean photo-booth prompt packs, ready for Gemini.
+        </h1>
+
+        <p class="mt-4 max-w-xl text-base leading-relaxed text-[var(--ink-muted)] sm:text-lg">
+          Pick a Life4Cuts, Polaroid, or Haru Film layout, choose your props and pastel backdrop from visual cards, then reveal your prompt and numbered reference kit. Generate on your own free Gemini account with no API key or login.
+        </p>
+
+        <div class="mt-7 flex flex-wrap items-center gap-3.5">
+          <a href="#packs" class="btn-booth no-underline">
+            Browse prompt packs
+          </a>
+          <a href="/how-to" class="btn-outline no-underline">
+            How to run a kit in Gemini
+          </a>
+        </div>
+
+        <dl class="mt-8 grid max-w-lg grid-cols-2 gap-4 border-t-2 border-[var(--border-subtle)] pt-5 text-sm sm:grid-cols-3">
+          <div>
+            <dt class="text-xs font-bold uppercase tracking-wider text-[var(--ink-muted)]">
+              Access
+            </dt>
+            <dd class="mt-1 font-bold text-[var(--ink)]">Free, no login</dd>
+          </div>
+          <div>
+            <dt class="text-xs font-bold uppercase tracking-wider text-[var(--ink-muted)]">
+              Output tool
+            </dt>
+            <dd class="mt-1 font-bold text-[var(--ink)]">Gemini app</dd>
+          </div>
+          <div class="col-span-2 sm:col-span-1">
+            <dt class="text-xs font-bold uppercase tracking-wider text-[var(--ink-muted)]">
+              Includes
+            </dt>
+            <dd class="mt-1 font-bold text-[var(--ink)]">Prompt + numbered ZIP</dd>
+          </div>
+        </dl>
+      </div>
+
+      {
+        featuredPack && (
+          <div class="md:col-span-5">
+            <div class="mx-auto max-w-[320px] rounded-[20px] border-2 border-[var(--ink)] bg-[var(--surface)] p-4 shadow-[5px_5px_0_var(--ink)]">
+              <div class="mb-3 flex items-center justify-between gap-2 text-xs font-bold">
+                <span class="rounded-md border border-[var(--ink)] bg-[var(--accent)] px-2.5 py-1 text-[var(--on-accent)]">
+                  Featured · {featuredPack.formatLabelKo}
+                </span>
+                <span class="rounded-md border border-[var(--border-control)] bg-[var(--bg)] px-2 py-1 text-[var(--ink-muted)]">
+                  SAMPLE
+                </span>
+              </div>
+
+              <a
+                href={`/pack/${featuredPack.slug}`}
+                className="block overflow-hidden rounded-2xl border-2 border-[var(--ink)] bg-[var(--bg)]"
+              >
+                <img
+                  src={featuredPack.previewImage}
+                  alt={`${featuredPack.title} featured Korean 4-cut photo strip sample`}
+                  width={featuredPack.previewWidth}
+                  height={featuredPack.previewHeight}
+                  fetchpriority="high"
+                  className="mx-auto block max-h-[390px] w-full object-contain"
+                />
+              </a>
+
+              <div class="mt-3.5 flex items-center justify-between gap-3">
+                <div class="min-w-0">
+                  <p class="truncate font-[var(--font-display)] text-base font-extrabold text-[var(--ink)]">
+                    {featuredPack.title}
+                  </p>
+                  <p class="text-xs font-semibold text-[var(--ink-muted)]">
+                    {featuredPack.titleKo} · {featuredPack.cuts} cuts
+                  </p>
+                </div>
+                <a
+                  href={`/pack/${featuredPack.slug}`}
+                  class="inline-flex min-h-[44px] shrink-0 items-center rounded-xl border-2 border-[var(--ink)] bg-[var(--surface-tint)] px-3.5 py-2 text-xs font-extrabold text-[var(--ink)] no-underline transition-colors hover:bg-[var(--accent)]"
+                >
+                  Open pack
+                </a>
+              </div>
+            </div>
+          </div>
+        )
+      }
+    </section>
+
+    <!-- Main Filterable Pack Gallery -->
+    <PackGallery packs={packs} client:load />
+
+    <!-- Compact Contact-Sheet Strip explaining the attachment flow -->
+    <section
+      aria-labelledby="flow-heading"
+      class="mt-16 rounded-[20px] border-2 border-[var(--ink)] bg-[var(--surface)] p-6 sm:p-8"
+    >
+      <div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 id="flow-heading" class="text-xl font-extrabold sm:text-2xl">
+            Why the numbered kit works better than text alone
+          </h2>
+          <p class="mt-1 max-w-2xl text-sm text-[var(--ink-muted)]">
+            Text prompts alone drift on strip proportions and prop details. Each pack pairs your customized prompt with matching reference images numbered for Gemini.
+          </p>
+        </div>
+        <a href="/how-to" class="btn-outline shrink-0 self-start no-underline md:self-auto">
+          Full guide
+        </a>
+      </div>
+
+      <ol class="mt-6 grid grid-cols-1 gap-4 border-t-2 border-[var(--border-subtle)] pt-6 md:grid-cols-3">
+        <li class="rounded-2xl border-2 border-[var(--border-subtle)] bg-[var(--bg)] p-4">
+          <span class="inline-block rounded-md border border-[var(--ink)] bg-[var(--accent)] px-2 py-0.5 font-mono text-xs font-extrabold text-[var(--on-accent)]">
+            01
+          </span>
+          <h3 class="mt-2.5 text-base font-extrabold">Pick your props and backdrop</h3>
+          <p class="mt-1 text-sm leading-relaxed text-[var(--ink-muted)]">
+            Select up to one prop per slot (headwear, eyewear, hands) plus a pastel or wallpaper backdrop. Poses stay text-only so Gemini keeps your own face.
+          </p>
+        </li>
+        <li class="rounded-2xl border-2 border-[var(--border-subtle)] bg-[var(--bg)] p-4">
+          <span class="inline-block rounded-md border border-[var(--ink)] bg-[var(--accent)] px-2 py-0.5 font-mono text-xs font-extrabold text-[var(--on-accent)]">
+            02
+          </span>
+          <h3 class="mt-2.5 text-base font-extrabold">Reveal prompt and download kit</h3>
+          <p class="mt-1 text-sm leading-relaxed text-[var(--ink-muted)]">
+            Tap Reveal prompt (찰칵!) to compile the exact prompt and package your strip template, prop images, and backdrop as numbered files (02, 03, 04...).
+          </p>
+        </li>
+        <li class="rounded-2xl border-2 border-[var(--border-subtle)] bg-[var(--bg)] p-4">
+          <span class="inline-block rounded-md border border-[var(--ink)] bg-[var(--accent)] px-2 py-0.5 font-mono text-xs font-extrabold text-[var(--on-accent)]">
+            03
+          </span>
+          <h3 class="mt-2.5 text-base font-extrabold">Attach in Gemini and generate</h3>
+          <p class="mt-1 text-sm leading-relaxed text-[var(--ink-muted)]">
+            Upload your selfie first (Image 1), attach the numbered kit images in order, paste the prompt in gemini.google.com, and send.
+          </p>
+        </li>
+      </ol>
+    </section>
+  </div>
+</BaseLayout>

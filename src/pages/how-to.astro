@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_CONFIG } from '../config/site';
+---
+
+<BaseLayout
+  title="How to Use in Gemini · GAMSEONG PHOTO (감성네컷)"
+  description="Step-by-step guide to attaching your selfie and numbered reference kit inside the free Gemini app for consistent Korean photo-booth strips."
+  currentPath="/how-to"
+>
+  <div class="mx-auto max-w-4xl px-4 pb-12 pt-8 sm:px-6 sm:pt-12">
+    <header class="border-b-2 border-[var(--border-subtle)] pb-6">
+      <h1 class="text-[clamp(1.85rem,4vw,2.8rem)] font-extrabold leading-tight">
+        How to run a prompt kit in Gemini{' '}
+        <span class="inline-block break-keep font-semibold text-[var(--ink-muted)]">사용 방법</span>
+      </h1>
+      <p class="mt-3 max-w-2xl text-base leading-relaxed text-[var(--ink-muted)]">
+        Gamseong Photo Booth prepares the prompt and reference files for you. Image generation happens inside Google's own Gemini app on your free or Pro Google account, so you never need an API key or paid billing setup.
+      </p>
+    </header>
+
+    <div class="mt-8 space-y-8">
+      <section aria-labelledby="steps-title" class="rounded-[20px] border-2 border-[var(--ink)] bg-[var(--surface)] p-6">
+        <h2 id="steps-title" class="text-xl font-extrabold">Running a pack in gemini.google.com</h2>
+
+        <ol class="mt-4 space-y-4 text-sm leading-relaxed text-[var(--ink)] sm:text-base">
+          <li class="rounded-xl border border-[var(--border-subtle)] bg-[var(--bg)] p-4">
+            <p class="font-extrabold">1. Customize and reveal your prompt</p>
+            <p class="mt-1 text-[var(--ink-muted)]">
+              Open any pack, pick your props, pastel backdrop, pose pack, and film mood, then tap <strong>Reveal prompt · 찰칵!</strong>. Every selected prop and backdrop is automatically assigned an exact Image number.
+            </p>
+          </li>
+          <li class="rounded-xl border border-[var(--border-subtle)] bg-[var(--bg)] p-4">
+            <p class="font-extrabold">2. Download your numbered reference kit</p>
+            <p class="mt-1 text-[var(--ink-muted)]">
+              Download the ZIP bundle on desktop, or tap individual <strong>Save file</strong> buttons on a phone if you prefer saving directly to your camera roll. Files start at <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">02-</code> because your own selfie is always Image 1.
+            </p>
+          </li>
+          <li class="rounded-xl border border-[var(--border-subtle)] bg-[var(--bg)] p-4">
+            <p class="font-extrabold">3. Attach in exact order inside one Gemini message</p>
+            <p class="mt-1 text-[var(--ink-muted)]">
+              Open{' '}
+              <a
+                href={SITE_CONFIG.geminiAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-bold text-[var(--accent-text)] underline underline-offset-2"
+              >
+                gemini.google.com
+              </a>
+              , start a fresh chat, upload your selfie first (Image 1), then upload <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">02-...</code>, <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">03-...</code>, and so on. Paste the copied prompt and send.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="tips-title" class="rounded-[20px] border-2 border-[var(--ink)] bg-[var(--surface)] p-6">
+        <h2 id="tips-title" class="text-xl font-extrabold">Getting clean, consistent faces</h2>
+        <ul class="mt-4 list-disc space-y-2.5 pl-5 text-sm leading-relaxed text-[var(--ink-muted)] sm:text-base">
+          <li>
+            <strong class="text-[var(--ink)]">Use a bright, front-facing solo selfie:</strong> even lighting without heavy sunglasses or hands blocking your face gives Gemini the clearest reference for all 4 cuts.
+          </li>
+          <li>
+            <strong class="text-[var(--ink)]">Why poses are text-only:</strong> attaching a photo of another person doing a pose often makes Gemini blend their face with yours. Keeping poses in text preserves your own likeness while props and backdrops still attach as images.
+          </li>
+          <li>
+            <strong class="text-[var(--ink)]">About preview matching:</strong> keeping a pack's default picks gets the closest match to the preview image, though AI image generation naturally varies slightly each run.
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="authors-title" class="rounded-[20px] border-2 border-[var(--ink)] bg-[var(--surface-tint)] p-6">
+        <h2 id="authors-title" class="text-xl font-extrabold">Adding your own packs to this site</h2>
+        <p class="mt-2 text-sm leading-relaxed text-[var(--ink)] sm:text-base">
+          Every pack lives in its own folder under <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">content/packs/&lt;slug&gt;/pack.json</code> with preview and template files under <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">public/assets/packs/&lt;slug&gt;/</code>. Run <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">pnpm run validate:packs</code> before pushing to catch missing images, invalid option IDs, or unresolved template placeholders.
+        </p>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <a href="/" class="btn-booth no-underline">Browse prompt packs</a>
+          <a
+            href={SITE_CONFIG.geminiAppUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-outline no-underline"
+          >
+            Open Gemini app
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>

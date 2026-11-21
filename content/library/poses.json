@@ -1,0 +1,34 @@
+[
+  {
+    "id": "cute-classic",
+    "label": "Cute Classic",
+    "labelKo": "귀여운 포즈",
+    "summary": "Peace sign, finger heart, cheek poke, and a playful wink.",
+    "promptText": "classic cute Korean photo booth poses across frames (Frame 1: cheerful peace sign beside cheek; Frame 2: Korean finger heart with a bright smile; Frame 3: playful double cheek poke; Frame 4: double peace sign with a wink)",
+    "image": "/assets/library/poses/cute-classic.png"
+  },
+  {
+    "id": "funny-playful",
+    "label": "Funny & Silly",
+    "labelKo": "장난꾸러기",
+    "summary": "Hands on cheeks, surprised face, peeking over glasses, big grin.",
+    "promptText": "playful, funny Korean photo booth poses across frames (Frame 1: surprised expression with both hands on cheeks; Frame 2: cheeky wink with tilted head; Frame 3: dramatic star-frame hands around face; Frame 4: big candid laugh looking at camera)",
+    "image": "/assets/library/poses/funny-playful.png"
+  },
+  {
+    "id": "chic-editorial",
+    "label": "Chic & Calm",
+    "labelKo": "시크 무드",
+    "summary": "Chin hand rest, soft side glance, relaxed studio smile.",
+    "promptText": "calm, chic Korean self-studio poses (resting chin lightly on hand, gentle relaxed smile, natural side-angled gaze, understated confidence)",
+    "image": "/assets/library/poses/chic-editorial.png"
+  },
+  {
+    "id": "heart-overload",
+    "label": "Heart Pack",
+    "labelKo": "하트 모음",
+    "summary": "Cheek heart, big overhead heart, finger heart, and hand-framed heart.",
+    "promptText": "all-heart Korean photo booth poses across frames (Frame 1: half-heart against cheek; Frame 2: big heart formed with arms overhead; Frame 3: classic Korean finger heart; Frame 4: both hands forming a heart near chin)",
+    "image": "/assets/library/poses/heart-overload.png"
+  }
+]

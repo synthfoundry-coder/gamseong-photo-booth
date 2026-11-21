@@ -1,0 +1,74 @@
+[
+  {
+    "id": "bunny-ears",
+    "label": "Plush Bunny Ears",
+    "labelKo": "토끼 귀 머리띠",
+    "slot": "headwear",
+    "promptText": "a fluffy white plush bunny ears headband with pastel pink inner ears",
+    "image": "/assets/library/props/bunny-ears.png",
+    "attachToKit": true
+  },
+  {
+    "id": "cream-beret",
+    "label": "Butter Cream Beret",
+    "labelKo": "크림 베레모",
+    "slot": "headwear",
+    "promptText": "a cozy butter-cream knit French beret tilted slightly with a tiny pink bow",
+    "image": "/assets/library/props/cream-beret.png",
+    "attachToKit": true
+  },
+  {
+    "id": "pink-bandana",
+    "label": "Pink Gingham Bandana",
+    "labelKo": "체크 반다나",
+    "slot": "headwear",
+    "promptText": "a pastel pink gingham headscarf bandana tied neatly around the head",
+    "image": "/assets/library/props/pink-bandana.png",
+    "attachToKit": true
+  },
+  {
+    "id": "heart-glasses",
+    "label": "Pink Heart Sunglasses",
+    "labelKo": "하트 선글라스",
+    "slot": "eyewear",
+    "promptText": "translucent pastel pink heart-shaped sunglasses resting lightly on the head or eyes",
+    "image": "/assets/library/props/heart-glasses.png",
+    "attachToKit": true
+  },
+  {
+    "id": "star-glasses",
+    "label": "Y2K Star Glasses",
+    "labelKo": "별 안경",
+    "slot": "eyewear",
+    "promptText": "pastel sky-blue Y2K star-shaped rimless tinted glasses",
+    "image": "/assets/library/props/star-glasses.png",
+    "attachToKit": true
+  },
+  {
+    "id": "round-glasses",
+    "label": "Tortoiseshell Glasses",
+    "labelKo": "동그란 안경",
+    "slot": "eyewear",
+    "promptText": "classic round tortoiseshell eyeglasses with clear lenses",
+    "image": "/assets/library/props/round-glasses.png",
+    "attachToKit": true
+  },
+  {
+    "id": "bear-mittens",
+    "label": "Bear Paw Mittens",
+    "labelKo": "곰돌이 장갑",
+    "slot": "accessory",
+    "promptText": "fluffy brown teddy bear paw plush mittens with cream paw pads",
+    "image": "/assets/library/props/bear-mittens.png",
+    "attachToKit": true
+  },
+  {
+    "id": "mini-bouquet",
+    "label": "Daisy & Tulip Bouquet",
+    "labelKo": "미니 꽃다발",
+    "slot": "accessory",
+    "promptText": "holding a mini pastel bouquet of white daisies and butter-yellow tulips wrapped in cream kraft paper",
+    "image": "/assets/library/props/mini-bouquet.png",
+    "attachToKit": true
+  }
+]

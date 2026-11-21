@@ -1,0 +1,34 @@
+[
+  {
+    "id": "soft-studio",
+    "label": "Soft Korean Flash",
+    "labelKo": "스튜디오 플래시",
+    "summary": "Bright, clean ring-flash lighting with smooth natural skin tones.",
+    "promptText": "bright, clean Korean photo booth ring-flash lighting, crisp focus, natural healthy skin glow, subtle pastel color balance",
+    "swatchHex": "#FFF9EB"
+  },
+  {
+    "id": "warm-film",
+    "label": "Warm Cafe Film",
+    "labelKo": "따뜻한 필름",
+    "summary": "Golden analog warmth with fine 35mm grain and gentle shadows.",
+    "promptText": "warm 35mm analog film color grading, subtle fine film grain, cozy golden highlights, gentle creamy shadows",
+    "swatchHex": "#F9E2B8"
+  },
+  {
+    "id": "dreamy-pastel",
+    "label": "Dreamy Soft Glow",
+    "labelKo": "몽글 파스텔",
+    "summary": "Airy pastel highlights with soft lens diffusion.",
+    "promptText": "airy high-key pastel tone, very slight soft-focus halation on highlights, bright milky exposure, dreamy Korean self-booth aesthetic",
+    "swatchHex": "#FCE4EC"
+  },
+  {
+    "id": "classic-bw",
+    "label": "Classic Monochrome",
+    "labelKo": "흑백 감성",
+    "summary": "Crisp black-and-white contrast inspired by Seongsu self-studios.",
+    "promptText": "crisp high-contrast black and white photography, fine silver-halide grain, clean studio key light, timeless Korean monochrome booth look",
+    "swatchHex": "#D6D3D1"
+  }
+]

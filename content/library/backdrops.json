@@ -1,0 +1,82 @@
+[
+  {
+    "id": "baby-blue",
+    "label": "Baby Blue Studio",
+    "labelKo": "베이비 블루",
+    "kind": "solid",
+    "swatchHex": "#C8E4FA",
+    "promptText": "a smooth pastel baby-blue photo booth curtain backdrop with soft even studio lighting",
+    "image": "/assets/library/backdrops/baby-blue.png",
+    "attachToKit": true
+  },
+  {
+    "id": "strawberry-milk",
+    "label": "Strawberry Milk",
+    "labelKo": "딸기우유 핑크",
+    "kind": "solid",
+    "swatchHex": "#FFDCE8",
+    "promptText": "a smooth pastel strawberry-milk pink photo booth backdrop with soft studio lighting",
+    "image": "/assets/library/backdrops/strawberry-milk.png",
+    "attachToKit": true
+  },
+  {
+    "id": "butter-yellow",
+    "label": "Butter Cream",
+    "labelKo": "버터 옐로우",
+    "kind": "solid",
+    "swatchHex": "#FFF1B8",
+    "promptText": "a warm pastel butter-yellow Korean studio backdrop with soft gentle falloff",
+    "image": "/assets/library/backdrops/butter-yellow.png",
+    "attachToKit": true
+  },
+  {
+    "id": "soft-lilac",
+    "label": "Soft Lilac",
+    "labelKo": "라일락 퍼플",
+    "kind": "solid",
+    "swatchHex": "#E6D9FA",
+    "promptText": "a clean pastel lavender-lilac photo booth backdrop with soft studio lighting",
+    "image": "/assets/library/backdrops/soft-lilac.png",
+    "attachToKit": true
+  },
+  {
+    "id": "mint-cream",
+    "label": "Mint Cream",
+    "labelKo": "민트 크림",
+    "kind": "solid",
+    "swatchHex": "#D0F0E3",
+    "promptText": "a pastel mint-cream photo booth backdrop with soft studio lighting",
+    "image": "/assets/library/backdrops/mint-cream.png",
+    "attachToKit": true
+  },
+  {
+    "id": "pastel-clouds",
+    "label": "Sky Clouds Wallpaper",
+    "labelKo": "구름 배경",
+    "kind": "wallpaper",
+    "swatchHex": "#B6DFFA",
+    "promptText": "a dreamy pastel sky-blue studio wallpaper with soft fluffy white clouds",
+    "image": "/assets/library/backdrops/pastel-clouds.png",
+    "attachToKit": true
+  },
+  {
+    "id": "gingham-pink",
+    "label": "Pink Gingham Curtain",
+    "labelKo": "핑크 체크",
+    "kind": "wallpaper",
+    "swatchHex": "#FFC8DA",
+    "promptText": "a pastel pink and cream gingham check fabric photo booth curtain backdrop",
+    "image": "/assets/library/backdrops/gingham-pink.png",
+    "attachToKit": true
+  },
+  {
+    "id": "doodle-hearts",
+    "label": "Butter Doodle Hearts",
+    "labelKo": "하트 낙서",
+    "kind": "wallpaper",
+    "swatchHex": "#FFF3C4",
+    "promptText": "a butter-cream studio wallpaper scattered with tiny hand-drawn pastel coral hearts and small stars",
+    "image": "/assets/library/backdrops/doodle-hearts.png",
+    "attachToKit": true
+  }
+]

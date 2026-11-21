@@ -1,0 +1,332 @@
+@import "tailwindcss";
+@import "@fontsource/bricolage-grotesque/600.css";
+@import "@fontsource/bricolage-grotesque/700.css";
+@import "@fontsource/bricolage-grotesque/800.css";
+@import "@fontsource/plus-jakarta-sans/400.css";
+@import "@fontsource/plus-jakarta-sans/500.css";
+@import "@fontsource/plus-jakarta-sans/600.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+
+@theme {
+  --font-display: "Bricolage Grotesque", "Noto Sans KR", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Noto Sans KR", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+}
+
+/* Theme tokens: every pairing verified >= 5.2:1 via contrast-check.py */
+:root,
+:root[data-theme="yellow"] {
+  color-scheme: light;
+  --bg: #FAF6EE;
+  --surface: #FFFFFF;
+  --surface-tint: #FFF8D6;
+  --ink: #1C1917;
+  --ink-muted: #57534E;
+  --border-subtle: #DED5C6;
+  --border-control: #6E665C;
+  --accent: #FEE500;
+  --accent-hover: #F2D500;
+  --on-accent: #1C1917;
+  --accent-text: #6E5200;
+  --focus-ring: #1C1917;
+  --success-text: #166534;
+  --success-bg: #DCFCE7;
+  --error-text: #B91C1C;
+  --error-bg: #FEE2E2;
+}
+
+:root[data-theme="pink"] {
+  color-scheme: light;
+  --bg: #FDF5F7;
+  --surface: #FFFFFF;
+  --surface-tint: #FCE8EE;
+  --ink: #1C1917;
+  --ink-muted: #57534E;
+  --border-subtle: #EBD4DC;
+  --border-control: #6E665C;
+  --accent: #FFB8CD;
+  --accent-hover: #F99DB9;
+  --on-accent: #2B141C;
+  --accent-text: #8E294C;
+  --focus-ring: #2B141C;
+  --success-text: #166534;
+  --success-bg: #DCFCE7;
+  --error-text: #B91C1C;
+  --error-bg: #FEE2E2;
+}
+
+:root[data-theme="blue"] {
+  color-scheme: light;
+  --bg: #F3F8FC;
+  --surface: #FFFFFF;
+  --surface-tint: #E3F1FA;
+  --ink: #1C1917;
+  --ink-muted: #57534E;
+  --border-subtle: #CFE0EC;
+  --border-control: #6E665C;
+  --accent: #9FD4FF;
+  --accent-hover: #7EC4FC;
+  --on-accent: #102436;
+  --accent-text: #18527E;
+  --focus-ring: #102436;
+  --success-text: #166534;
+  --success-bg: #DCFCE7;
+  --error-text: #B91C1C;
+  --error-bg: #FEE2E2;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+@layer base {
+  html {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background-color: var(--bg);
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  /* Pointer cursor base layer after Tailwind preflight */
+  a[href],
+  button,
+  summary,
+  select,
+  label[for],
+  label:has(> input[type="checkbox"], > input[type="radio"]),
+  [role="button"],
+  [role="link"],
+  [role="tab"],
+  [role="menuitem"],
+  [role="option"],
+  [role="switch"],
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="file"],
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"] {
+    cursor: pointer;
+  }
+
+  :disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 100;
+  background: var(--ink);
+  color: #FFFFFF;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* Booth button elevation used selectively on primary CTAs */
+.btn-booth {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.65rem 1.25rem;
+  border-radius: 10px;
+  border: 2px solid var(--ink);
+  background-color: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+}
+
+.btn-booth:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.btn-booth:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.btn-booth:disabled {
+  opacity: 0.55;
+  box-shadow: none;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.6rem 1.1rem;
+  border-radius: 10px;
+  border: 2px solid var(--ink);
+  background-color: var(--surface);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.92rem;
+  line-height: 1.2;
+  transition: background-color 140ms ease, transform 140ms ease;
+}
+
+.btn-outline:hover:not(:disabled) {
+  background-color: var(--surface-tint);
+}
+
+.btn-outline:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn-outline:disabled {
+  opacity: 0.55;
+}
+
+/* Tab styling driven directly by aria-selected with non-layout-shifting border underline */
+.customizer-tablist {
+  display: flex;
+  gap: 0.25rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: inline proximity;
+  border-bottom: 2px solid var(--border-subtle);
+  scrollbar-width: none;
+}
+
+.customizer-tablist::-webkit-scrollbar {
+  display: none;
+}
+
+.customizer-tab {
+  position: relative;
+  flex: none;
+  scroll-snap-align: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  background: transparent;
+  border: 0;
+  color: var(--ink-muted);
+  font-weight: 600;
+  font-size: 0.92rem;
+  white-space: nowrap;
+  transition: color 140ms ease, background-color 140ms ease;
+}
+
+.customizer-tab:hover {
+  color: var(--ink);
+  background-color: var(--surface-tint);
+}
+
+.customizer-tab[aria-selected="true"] {
+  color: var(--ink);
+}
+
+.customizer-tab[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -2px 0;
+  border-block-end: 4px solid var(--ink);
+}
+
+/* Native modal dialog scroll containment per modern-web-guidance */
+dialog:modal {
+  overscroll-behavior: contain;
+  margin: auto;
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  padding: 0;
+  background-color: var(--surface);
+  color: var(--ink);
+  max-width: min(92vw, 640px);
+  max-height: 90dvh;
+}
+
+dialog::backdrop {
+  background-color: rgb(28 25 23 / 0.56);
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+/* Shutter flash animation triggered once when revealing the prompt */
+@keyframes shutter-flash {
+  0% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.shutter-flash-overlay {
+  animation: shutter-flash 360ms ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .btn-booth,
+  .btn-outline {
+    border: 2px solid ButtonText;
+    box-shadow: none;
+  }
+  .customizer-tab[aria-selected="true"]::after {
+    border-block-end-color: Highlight;
+  }
+  [aria-pressed="true"],
+  [data-selected="true"] {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+}

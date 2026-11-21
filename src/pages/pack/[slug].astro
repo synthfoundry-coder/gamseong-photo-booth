@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PackCustomizer from '../../components/PackCustomizer';
+import { loadAllPacks, loadLibrary } from '../../lib/content';
+
+export function getStaticPaths() {
+  const packs = loadAllPacks();
+  const library = loadLibrary();
+  return packs.map((pack) => ({
+    params: { slug: pack.slug },
+    props: { pack, library },
+  }));
+}
+
+const { pack, library } = Astro.props;
+---
+
+<BaseLayout
+  title={`${pack.title} (${pack.titleKo}) · GAMSEONG PHOTO`}
+  description={`${pack.subtitle} Customize props, backdrop, pose, and film mood, then download the numbered Gemini kit.`}
+  ogImage={pack.previewImage}
+  currentPath={`/pack/${pack.slug}`}
+>
+  <div class="mx-auto max-w-6xl px-4 pb-10 pt-6 sm:px-6 sm:pt-8">
+    <nav aria-label="Breadcrumb" class="mb-5">
+      <ol class="flex flex-wrap items-center gap-2 text-sm font-semibold text-[var(--ink-muted)]">
+        <li>
+          <a
+            href="/"
+            class="inline-flex min-h-[44px] items-center rounded-lg px-2 py-1 text-[var(--ink)] underline-offset-4 hover:underline"
+          >
+            Prompt Packs
+          </a>
+        </li>
+        <li aria-hidden="true">/</li>
+        <li aria-current="page" class="text-[var(--ink-muted)]">{pack.title}</li>
+      </ol>
+    </nav>
+
+    <PackCustomizer pack={pack} library={library} client:load />
+  </div>
+</BaseLayout>

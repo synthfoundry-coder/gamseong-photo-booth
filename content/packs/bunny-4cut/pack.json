@@ -1,0 +1,44 @@
+{
+  "slug": "bunny-4cut",
+  "title": "Plush Bunny 4-Cut Strip",
+  "titleKo": "토끼 감성 네컷",
+  "subtitle": "Classic vertical 4-cut Life4Cuts strip with bright studio flash and four playful solo poses.",
+  "format": "4-cut",
+  "formatLabel": "4-Cut Strip",
+  "formatLabelKo": "네컷",
+  "cuts": 4,
+  "tags": ["Cute", "Classic", "Pastel"],
+  "isNew": true,
+  "isSample": true,
+  "premium": false,
+  "previewImage": "/assets/packs/bunny-4cut/preview.png",
+  "previewWidth": 720,
+  "previewHeight": 1290,
+  "aspectClass": "strip-tall",
+  "requiredFiles": [
+    {
+      "id": "strip-template",
+      "label": "4-Cut Vertical Strip Guide",
+      "roleDescription": "4-cut vertical strip layout frame and spacing guide",
+      "path": "/assets/packs/bunny-4cut/files/strip-template-4cut.png",
+      "filename": "strip-template-4cut.png"
+    }
+  ],
+  "allowed": {
+    "headwear": ["bunny-ears", "cream-beret", "pink-bandana"],
+    "eyewear": ["heart-glasses", "star-glasses", "round-glasses"],
+    "accessory": ["bear-mittens", "mini-bouquet"],
+    "backdrops": ["baby-blue", "strawberry-milk", "butter-yellow", "soft-lilac", "gingham-pink", "doodle-hearts"],
+    "poses": ["cute-classic", "funny-playful", "heart-overload", "chic-editorial"],
+    "moods": ["soft-studio", "dreamy-pastel", "warm-film", "classic-bw"]
+  },
+  "defaults": {
+    "headwear": "bunny-ears",
+    "eyewear": "heart-glasses",
+    "accessory": null,
+    "backdrop": "baby-blue",
+    "pose": "cute-classic",
+    "mood": "soft-studio"
+  },
+  "template": "Create a realistic Korean 4-cut vertical photo booth strip (Life4Cuts style).\n\nReference files attached:\n{attachments.list}\n\nIdentity & framing:\n- Keep the exact face, hair, and likeness of the person in Image 1 (my selfie) consistent across all 4 cuts.\n- Follow the exact 1x4 vertical strip proportions, clean cream border, and bottom footer label \"GAMSEONG PHOTO\" from {file.strip-template}.\n\nStyling & props:\n- {props.sentence}\n- Keep the person's everyday outfit natural and cohesive across all 4 frames.\n\nBackdrop & poses:\n- Background behind the subject in every cut: {backdrop.full}.\n- Poses: {pose.text}.\n\nLighting & finish:\n- {mood.text}.\n- Authentic Korean self-photo booth photography, sharp eyes, natural skin texture, zero extra text overlays inside the photo frames."
+}

@@ -1,0 +1,44 @@
+{
+  "slug": "y2k-haru-2x2",
+  "title": "Sky Cloud Haru 2x2",
+  "titleKo": "하루필름 2x2",
+  "subtitle": "Four lively frames arranged in a 2x2 Haru Film grid with sky-blue borders and Y2K accessories.",
+  "format": "haru-2x2",
+  "formatLabel": "Haru Film 2x2",
+  "formatLabelKo": "하루필름",
+  "cuts": 4,
+  "tags": ["Y2K", "Cute", "Wallpaper"],
+  "isNew": true,
+  "isSample": true,
+  "premium": false,
+  "previewImage": "/assets/packs/y2k-haru-2x2/preview.png",
+  "previewWidth": 800,
+  "previewHeight": 1200,
+  "aspectClass": "grid-2x2",
+  "requiredFiles": [
+    {
+      "id": "strip-template",
+      "label": "Haru Film 2x2 Grid Guide",
+      "roleDescription": "2x2 Haru Film grid frame layout and margins guide",
+      "path": "/assets/packs/y2k-haru-2x2/files/strip-template-haru-2x2.png",
+      "filename": "strip-template-haru-2x2.png"
+    }
+  ],
+  "allowed": {
+    "headwear": ["pink-bandana", "bunny-ears", "cream-beret"],
+    "eyewear": ["star-glasses", "heart-glasses", "round-glasses"],
+    "accessory": ["mini-bouquet", "bear-mittens"],
+    "backdrops": ["pastel-clouds", "baby-blue", "soft-lilac", "gingham-pink", "mint-cream"],
+    "poses": ["funny-playful", "cute-classic", "heart-overload", "chic-editorial"],
+    "moods": ["dreamy-pastel", "soft-studio", "warm-film", "classic-bw"]
+  },
+  "defaults": {
+    "headwear": "pink-bandana",
+    "eyewear": "star-glasses",
+    "accessory": null,
+    "backdrop": "pastel-clouds",
+    "pose": "funny-playful",
+    "mood": "dreamy-pastel"
+  },
+  "template": "Create a realistic Korean Haru Film 2x2 photo booth sheet (4 distinct cuts in a 2-column by 2-row grid).\n\nReference files attached:\n{attachments.list}\n\nIdentity & framing:\n- Keep the exact face and likeness of the person in Image 1 (my selfie) consistent in all 4 frames.\n- Follow the exact 2x2 grid proportions, pastel blue border, and \"GAMSEONG PHOTO\" footer from {file.strip-template}.\n\nStyling & props:\n- {props.sentence}\n\nBackdrop & poses:\n- Backdrop inside each of the 4 cuts: {backdrop.full}.\n- Poses across the 4 frames: {pose.text}.\n\nLighting & finish:\n- {mood.text}.\n- Authentic Korean Haru Film self-booth style, bright crisp lighting, natural skin, clean borders."
+}
