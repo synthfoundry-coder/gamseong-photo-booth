@@ -130,35 +130,21 @@ import { SITE_CONFIG } from '../config/site';
         </ul>
       </section>
 
-      <section aria-labelledby="authors-title" class="rounded-[20px] border-2 border-[var(--ink)] bg-[var(--surface-tint)] p-6">
-        <h2 id="authors-title" class="text-xl font-extrabold">
-          <span data-lang-block="id">Menambahkan pack milikmu sendiri</span>
-          <span data-lang-block="en">Adding your own packs to this site</span>
-        </h2>
-        <p class="mt-2 text-sm leading-relaxed text-[var(--ink)] sm:text-base">
-          <span data-lang-block="id">
-            Setiap pack tersimpan di foldernya sendiri pada <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">content/packs/&lt;slug&gt;/pack.json</code> dengan gambar pratinjau dan template di <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">public/assets/packs/&lt;slug&gt;/</code>. Jalankan <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">pnpm run validate:packs</code> sebelum push untuk mengecek gambar hilang, ID opsi, atau placeholder prompt.
-          </span>
-          <span data-lang-block="en">
-            Every pack lives in its own folder under <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">content/packs/&lt;slug&gt;/pack.json</code> with preview and template files under <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">public/assets/packs/&lt;slug&gt;/</code>. Run <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">pnpm run validate:packs</code> before pushing to catch missing images, invalid option IDs, or unresolved template placeholders.
-          </span>
-        </p>
-        <div class="mt-5 flex flex-wrap gap-3">
-          <a href="/" class="btn-booth no-underline">
-            <span data-lang-block="id">Lihat koleksi prompt</span>
-            <span data-lang-block="en">Browse prompt packs</span>
-          </a>
-          <a
-            href={SITE_CONFIG.geminiAppUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn-outline no-underline"
-          >
-            <span data-lang-block="id">Buka aplikasi Gemini</span>
-            <span data-lang-block="en">Open Gemini app</span>
-          </a>
-        </div>
-      </section>
+      <div class="flex flex-wrap gap-3 pt-2">
+        <a href="/" class="btn-booth no-underline">
+          <span data-lang-block="id">Lihat koleksi prompt</span>
+          <span data-lang-block="en">Browse prompt packs</span>
+        </a>
+        <a
+          href={SITE_CONFIG.geminiAppUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-outline no-underline"
+        >
+          <span data-lang-block="id">Buka aplikasi Gemini</span>
+          <span data-lang-block="en">Open Gemini app</span>
+        </a>
+      </div>
     </div>
   </div>
 </BaseLayout>
