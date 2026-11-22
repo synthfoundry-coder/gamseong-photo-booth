@@ -4,85 +4,158 @@ import { SITE_CONFIG } from '../config/site';
 ---
 
 <BaseLayout
-  title="How to Use in Gemini · GAMSEONG PHOTO (감성네컷)"
-  description="Step-by-step guide to attaching your selfie and numbered reference kit inside the free Gemini app for consistent Korean photo-booth strips."
+  title="Cara Pakai di Gemini · GAMSEONG PHOTO (감성네컷)"
+  titleEn="How to Use in Gemini · GAMSEONG PHOTO (감성네컷)"
+  description="Panduan langkah demi langkah melampirkan foto selfie dan paket referensi bernomor di aplikasi Gemini gratis untuk membuat strip photo booth ala Korea."
   currentPath="/how-to"
 >
   <div class="mx-auto max-w-4xl px-4 pb-12 pt-8 sm:px-6 sm:pt-12">
     <header class="border-b-2 border-[var(--border-subtle)] pb-6">
       <h1 class="text-[clamp(1.85rem,4vw,2.8rem)] font-extrabold leading-tight">
-        How to run a prompt kit in Gemini{' '}
+        <span data-lang-block="id">Cara menjalankan paket prompt di Gemini</span>
+        <span data-lang-block="en">How to run a prompt kit in Gemini</span>{' '}
         <span class="inline-block break-keep font-semibold text-[var(--ink-muted)]">사용 방법</span>
       </h1>
       <p class="mt-3 max-w-2xl text-base leading-relaxed text-[var(--ink-muted)]">
-        Gamseong Photo Booth prepares the prompt and reference files for you. Image generation happens inside Google's own Gemini app on your free or Pro Google account, so you never need an API key or paid billing setup.
+        <span data-lang-block="id">
+          Gamseong Photo Booth menyiapkan prompt lengkap beserta file referensinya untukmu. Pembuatan gambar dilakukan langsung di aplikasi resmi Gemini menggunakan akun Google gratis atau Pro milikmu, jadi kamu tidak perlu API key ataupun kartu kredit.
+        </span>
+        <span data-lang-block="en">
+          Gamseong Photo Booth prepares the prompt and reference files for you. Image generation happens inside Google's own Gemini app on your free or Pro Google account, so you never need an API key or paid billing setup.
+        </span>
       </p>
     </header>
 
     <div class="mt-8 space-y-8">
       <section aria-labelledby="steps-title" class="rounded-[20px] border-2 border-[var(--ink)] bg-[var(--surface)] p-6">
-        <h2 id="steps-title" class="text-xl font-extrabold">Running a pack in gemini.google.com</h2>
+        <h2 id="steps-title" class="text-xl font-extrabold">
+          <span data-lang-block="id">Langkah pemakaian di gemini.google.com</span>
+          <span data-lang-block="en">Running a pack in gemini.google.com</span>
+        </h2>
 
         <ol class="mt-4 space-y-4 text-sm leading-relaxed text-[var(--ink)] sm:text-base">
           <li class="rounded-xl border border-[var(--border-subtle)] bg-[var(--bg)] p-4">
-            <p class="font-extrabold">1. Customize and reveal your prompt</p>
+            <p class="font-extrabold">
+              <span data-lang-block="id">1. Atur opsi lalu buka prompt</span>
+              <span data-lang-block="en">1. Customize and reveal your prompt</span>
+            </p>
             <p class="mt-1 text-[var(--ink-muted)]">
-              Open any pack, pick your props, pastel backdrop, pose pack, and film mood, then tap <strong>Reveal prompt · 찰칵!</strong>. Every selected prop and backdrop is automatically assigned an exact Image number.
+              <span data-lang-block="id">
+                Buka salah satu pack, pilih properti, latar pastel, paket pose, dan nuansa film, lalu ketuk <strong>Tampilkan prompt · 찰칵!</strong>. Setiap properti dan latar yang dipilih otomatis mendapat nomor Image yang pasti.
+              </span>
+              <span data-lang-block="en">
+                Open any pack, pick your props, pastel backdrop, pose pack, and film mood, then tap <strong>Reveal prompt · 찰칵!</strong>. Every selected prop and backdrop is automatically assigned an exact Image number.
+              </span>
             </p>
           </li>
           <li class="rounded-xl border border-[var(--border-subtle)] bg-[var(--bg)] p-4">
-            <p class="font-extrabold">2. Download your numbered reference kit</p>
+            <p class="font-extrabold">
+              <span data-lang-block="id">2. Unduh paket file referensi bernomor</span>
+              <span data-lang-block="en">2. Download your numbered reference kit</span>
+            </p>
             <p class="mt-1 text-[var(--ink-muted)]">
-              Download the ZIP bundle on desktop, or tap individual <strong>Save file</strong> buttons on a phone if you prefer saving directly to your camera roll. Files start at <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">02-</code> because your own selfie is always Image 1.
+              <span data-lang-block="id">
+                Unduh file ZIP jika memakai laptop, atau ketuk tombol <strong>Simpan file</strong> satu per satu di HP jika ingin langsung masuk ke galeri tanpa ekstrak ZIP. Penomoran file dimulai dari <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">02-</code> karena foto selfiemu selalu menjadi Image 1.
+              </span>
+              <span data-lang-block="en">
+                Download the ZIP bundle on desktop, or tap individual <strong>Save file</strong> buttons on a phone if you prefer saving directly to your camera roll. Files start at <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">02-</code> because your own selfie is always Image 1.
+              </span>
             </p>
           </li>
           <li class="rounded-xl border border-[var(--border-subtle)] bg-[var(--bg)] p-4">
-            <p class="font-extrabold">3. Attach in exact order inside one Gemini message</p>
+            <p class="font-extrabold">
+              <span data-lang-block="id">3. Lampirkan sesuai urutan dalam satu chat Gemini</span>
+              <span data-lang-block="en">3. Attach in exact order inside one Gemini message</span>
+            </p>
             <p class="mt-1 text-[var(--ink-muted)]">
-              Open{' '}
-              <a
-                href={SITE_CONFIG.geminiAppUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="font-bold text-[var(--accent-text)] underline underline-offset-2"
-              >
-                gemini.google.com
-              </a>
-              , start a fresh chat, upload your selfie first (Image 1), then upload <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">02-...</code>, <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">03-...</code>, and so on. Paste the copied prompt and send.
+              <span data-lang-block="id">
+                Buka{' '}
+                <a
+                  href={SITE_CONFIG.geminiAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-bold text-[var(--accent-text)] underline underline-offset-2"
+                >
+                  gemini.google.com
+                </a>
+                , mulai chat baru, unggah foto selfiemu terlebih dahulu (Image 1), lalu unggah <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">02-...</code>, <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">03-...</code>, dan seterusnya. Tempel prompt yang sudah disalin lalu kirim.
+              </span>
+              <span data-lang-block="en">
+                Open{' '}
+                <a
+                  href={SITE_CONFIG.geminiAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-bold text-[var(--accent-text)] underline underline-offset-2"
+                >
+                  gemini.google.com
+                </a>
+                , start a fresh chat, upload your selfie first (Image 1), then upload <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">02-...</code>, <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">03-...</code>, and so on. Paste the copied prompt and send.
+              </span>
             </p>
           </li>
         </ol>
       </section>
 
       <section aria-labelledby="tips-title" class="rounded-[20px] border-2 border-[var(--ink)] bg-[var(--surface)] p-6">
-        <h2 id="tips-title" class="text-xl font-extrabold">Getting clean, consistent faces</h2>
+        <h2 id="tips-title" class="text-xl font-extrabold">
+          <span data-lang-block="id">Tips agar hasil wajah konsisten dan natural</span>
+          <span data-lang-block="en">Getting clean, consistent faces</span>
+        </h2>
         <ul class="mt-4 list-disc space-y-2.5 pl-5 text-sm leading-relaxed text-[var(--ink-muted)] sm:text-base">
           <li>
-            <strong class="text-[var(--ink)]">Use a bright, front-facing solo selfie:</strong> even lighting without heavy sunglasses or hands blocking your face gives Gemini the clearest reference for all 4 cuts.
+            <span data-lang-block="id">
+              <strong class="text-[var(--ink)]">Pakai selfie solo yang terang menghadap depan:</strong> pencahayaan merata tanpa kacamata gelap atau tangan menutupi wajah membantu Gemini menjaga kemiripan di semua 4 frame.
+            </span>
+            <span data-lang-block="en">
+              <strong class="text-[var(--ink)]">Use a bright, front-facing solo selfie:</strong> even lighting without heavy sunglasses or hands blocking your face gives Gemini the clearest reference for all 4 cuts.
+            </span>
           </li>
           <li>
-            <strong class="text-[var(--ink)]">Why poses are text-only:</strong> attaching a photo of another person doing a pose often makes Gemini blend their face with yours. Keeping poses in text preserves your own likeness while props and backdrops still attach as images.
+            <span data-lang-block="id">
+              <strong class="text-[var(--ink)]">Kenapa pose berupa teks saja:</strong> melampirkan foto pose orang lain sering membuat Gemini mencampur wajah orang tersebut dengan wajahmu. Menjaga pose dalam teks mempertahankan wajah aslimu, sementara properti dan latar tetap dilampirkan sebagai gambar.
+            </span>
+            <span data-lang-block="en">
+              <strong class="text-[var(--ink)]">Why poses are text-only:</strong> attaching a photo of another person doing a pose often makes Gemini blend their face with yours. Keeping poses in text preserves your own likeness while props and backdrops still attach as images.
+            </span>
           </li>
           <li>
-            <strong class="text-[var(--ink)]">About preview matching:</strong> keeping a pack's default picks gets the closest match to the preview image, though AI image generation naturally varies slightly each run.
+            <span data-lang-block="id">
+              <strong class="text-[var(--ink)]">Tentang kecocokan pratinjau:</strong> memakai pilihan bawaan pack memberi hasil yang paling dekat dengan gambar pratinjau, meski hasil AI secara alami sedikit berbeda di setiap percobaan.
+            </span>
+            <span data-lang-block="en">
+              <strong class="text-[var(--ink)]">About preview matching:</strong> keeping a pack's default picks gets the closest match to the preview image, though AI image generation naturally varies slightly each run.
+            </span>
           </li>
         </ul>
       </section>
 
       <section aria-labelledby="authors-title" class="rounded-[20px] border-2 border-[var(--ink)] bg-[var(--surface-tint)] p-6">
-        <h2 id="authors-title" class="text-xl font-extrabold">Adding your own packs to this site</h2>
+        <h2 id="authors-title" class="text-xl font-extrabold">
+          <span data-lang-block="id">Menambahkan pack milikmu sendiri</span>
+          <span data-lang-block="en">Adding your own packs to this site</span>
+        </h2>
         <p class="mt-2 text-sm leading-relaxed text-[var(--ink)] sm:text-base">
-          Every pack lives in its own folder under <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">content/packs/&lt;slug&gt;/pack.json</code> with preview and template files under <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">public/assets/packs/&lt;slug&gt;/</code>. Run <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">pnpm run validate:packs</code> before pushing to catch missing images, invalid option IDs, or unresolved template placeholders.
+          <span data-lang-block="id">
+            Setiap pack tersimpan di foldernya sendiri pada <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">content/packs/&lt;slug&gt;/pack.json</code> dengan gambar pratinjau dan template di <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">public/assets/packs/&lt;slug&gt;/</code>. Jalankan <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">pnpm run validate:packs</code> sebelum push untuk mengecek gambar hilang, ID opsi, atau placeholder prompt.
+          </span>
+          <span data-lang-block="en">
+            Every pack lives in its own folder under <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">content/packs/&lt;slug&gt;/pack.json</code> with preview and template files under <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">public/assets/packs/&lt;slug&gt;/</code>. Run <code class="rounded bg-[var(--surface)] px-1.5 py-0.5 font-mono text-xs">pnpm run validate:packs</code> before pushing to catch missing images, invalid option IDs, or unresolved template placeholders.
+          </span>
         </p>
         <div class="mt-5 flex flex-wrap gap-3">
-          <a href="/" class="btn-booth no-underline">Browse prompt packs</a>
+          <a href="/" class="btn-booth no-underline">
+            <span data-lang-block="id">Lihat koleksi prompt</span>
+            <span data-lang-block="en">Browse prompt packs</span>
+          </a>
           <a
             href={SITE_CONFIG.geminiAppUrl}
             target="_blank"
             rel="noopener noreferrer"
             class="btn-outline no-underline"
           >
-            Open Gemini app
+            <span data-lang-block="id">Buka aplikasi Gemini</span>
+            <span data-lang-block="en">Open Gemini app</span>
           </a>
         </div>
       </section>

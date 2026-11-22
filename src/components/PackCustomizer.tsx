@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { SITE_CONFIG } from '../config/site';
 import { attachLightDismissFallback } from '../lib/dialogFallback';
+import { FORMAT_LABELS, SAMPLE_PACK_SUBTITLES_ID, UI_TEXT, useLang } from '../lib/i18n';
 import { downloadKitZip } from '../lib/kit';
 import {
   FAVORITES_EVENT,
@@ -31,14 +32,18 @@ interface PackCustomizerProps {
 
 type StepId = 'props' | 'backdrop' | 'pose' | 'mood';
 
-const STEPS: Array<{ id: StepId; num: string; label: string; labelKo: string }> = [
-  { id: 'props', num: '01', label: 'Props', labelKo: '소품' },
-  { id: 'backdrop', num: '02', label: 'Backdrop', labelKo: '배경' },
-  { id: 'pose', num: '03', label: 'Pose', labelKo: '포즈' },
-  { id: 'mood', num: '04', label: 'Mood', labelKo: '무드' },
+const STEP_META: Array<{ id: StepId; num: string; labelKo: string }> = [
+  { id: 'props', num: '01', labelKo: '소품' },
+  { id: 'backdrop', num: '02', labelKo: '배경' },
+  { id: 'pose', num: '03', labelKo: '포즈' },
+  { id: 'mood', num: '04', labelKo: '무드' },
 ];
 
 export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
+  const lang = useLang();
+  const t = UI_TEXT[lang].customizer;
+  const formatLabels = FORMAT_LABELS[lang];
+
   const [selection, setSelection] = useState<CustomizerSelection>(pack.defaults);
   const [activeStep, setActiveStep] = useState<StepId>('props');
   const [isRevealed, setIsRevealed] = useState(false);
@@ -135,7 +140,7 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
   // Sync find-in-page matches inside hidden="until-found" tab panels.
   useEffect(() => {
     const cleanups: Array<() => void> = [];
-    for (const step of STEPS) {
+    for (const step of STEP_META) {
       const panel = panelRefs.current[step.id];
       if (!panel) continue;
       const onBeforeMatch = () => setActiveStep(step.id);
@@ -165,7 +170,7 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
     setZipStatus('idle');
     setZipError(null);
     if (isRevealed) {
-      announce('Prompt and kit updated for your new selection.');
+      announce(t.announceUpdated);
     }
   }
 
@@ -175,7 +180,7 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
     setCopyStatus('idle');
     setZipStatus('idle');
     setZipError(null);
-    announce('Reset all options to preview defaults.');
+    announce(t.announceReset);
   }
 
   function selectStep(stepId: StepId, shouldFocus = false) {
@@ -188,26 +193,26 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
   }
 
   function handleTabKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
-    const idx = STEPS.findIndex((s) => s.id === activeStep);
+    const idx = STEP_META.findIndex((s) => s.id === activeStep);
     if (event.key === 'ArrowRight') {
       event.preventDefault();
-      selectStep(STEPS[(idx + 1) % STEPS.length].id, true);
+      selectStep(STEP_META[(idx + 1) % STEP_META.length].id, true);
     } else if (event.key === 'ArrowLeft') {
       event.preventDefault();
-      selectStep(STEPS[(idx - 1 + STEPS.length) % STEPS.length].id, true);
+      selectStep(STEP_META[(idx - 1 + STEP_META.length) % STEP_META.length].id, true);
     } else if (event.key === 'Home') {
       event.preventDefault();
-      selectStep(STEPS[0].id, true);
+      selectStep(STEP_META[0].id, true);
     } else if (event.key === 'End') {
       event.preventDefault();
-      selectStep(STEPS[STEPS.length - 1].id, true);
+      selectStep(STEP_META[STEP_META.length - 1].id, true);
     }
   }
 
   function handleReveal() {
     setIsRevealed(true);
     setShowFlash(true);
-    announce('Prompt revealed. Copy the prompt and download your numbered reference kit.');
+    announce(t.announceRevealed);
     setTimeout(() => setShowFlash(false), 380);
     setTimeout(() => {
       revealSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -231,29 +236,29 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
         if (!ok) throw new Error('Copy command failed');
       }
       setCopyStatus('copied');
-      announce('Prompt copied to clipboard.');
+      announce(t.announceCopied);
       setTimeout(() => setCopyStatus('idle'), 2600);
     } catch {
       setCopyStatus('error');
-      announce('Could not copy automatically. Select the prompt text and copy manually.');
+      announce(t.announceCopyError);
     }
   }
 
   async function handleDownloadZip() {
     setZipStatus('loading');
     setZipError(null);
-    announce('Packing your numbered reference kit ZIP.');
+    announce(t.announcePacking);
     try {
       await downloadKitZip(pack, compiled);
       setZipStatus('done');
-      announce('Reference kit ZIP downloaded.');
+      announce(t.announceZipDone);
       setTimeout(() => setZipStatus('idle'), 2600);
     } catch (err) {
       setZipStatus('error');
       const msg =
         err instanceof Error ? err.message : 'Download failed while preparing the ZIP archive.';
       setZipError(msg);
-      announce(`Download failed: ${msg}`);
+      announce(msg);
     }
   }
 
@@ -261,10 +266,10 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
     const next = toggleFavorite(pack.slug);
     const fav = next.includes(pack.slug);
     setIsFavorite(fav);
-    announce(fav ? `Saved ${pack.title} to favorites.` : `Removed ${pack.title} from favorites.`);
+    announce(fav ? t.announceFavAdded(pack.title) : t.announceFavRemoved(pack.title));
   }
 
-  const activeStepIndex = STEPS.findIndex((s) => s.id === activeStep);
+  const activeStepIndex = STEP_META.findIndex((s) => s.id === activeStep);
   const downloadableFiles = compiled.attachments.filter((a) => !a.isUserSelfie && a.path);
 
   const selectedHeadwear = selection.headwear ? library.props[selection.headwear] : null;
@@ -273,6 +278,8 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
   const selectedBackdrop = library.backdrops[selection.backdrop];
   const selectedPose = library.poses[selection.pose];
   const selectedMood = library.moods[selection.mood];
+  const localizedSubtitle =
+    lang === 'id' ? (SAMPLE_PACK_SUBTITLES_ID[pack.slug] ?? pack.subtitle) : pack.subtitle;
 
   return (
     <div className="relative">
@@ -292,15 +299,15 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
         <div>
           <div className="flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center rounded-md border border-[var(--ink)] bg-[var(--surface)] px-2.5 py-1 text-xs font-bold text-[var(--ink)]">
-              {pack.formatLabel} · {pack.formatLabelKo}
+              {formatLabels[pack.format] ?? pack.formatLabel} · {pack.formatLabelKo}
             </span>
             {pack.isSample && (
               <span className="inline-flex items-center rounded-md border border-[var(--border-control)] bg-[var(--surface-tint)] px-2.5 py-1 text-xs font-bold text-[var(--ink-muted)]">
-                SAMPLE PACK
+                {t.samplePack}
               </span>
             )}
             <span className="text-xs font-semibold text-[var(--ink-muted)]">
-              {pack.cuts} {pack.cuts === 1 ? 'cut' : 'cuts'} · {compiled.attachments.length} total Gemini images
+              {t.cutAndTotal(pack.cuts, compiled.attachments.length)}
             </span>
           </div>
 
@@ -311,7 +318,7 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
             </span>
           </h1>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--ink-muted)] sm:text-base">
-            {pack.subtitle}
+            {localizedSubtitle}
           </p>
         </div>
 
@@ -326,7 +333,7 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
           }`}
         >
           <HeartIcon className="h-5 w-5" filled={isFavorite} />
-          <span>{isFavorite ? 'Saved' : 'Save pack'}</span>
+          <span>{isFavorite ? t.saved : t.savePack}</span>
         </button>
       </div>
 
@@ -337,7 +344,7 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
           <div className="rounded-[20px] border-2 border-[var(--ink)] bg-[var(--surface)] p-4 sm:p-5">
             <div className="flex items-center justify-between gap-2 pb-3">
               <span className="text-xs font-bold uppercase tracking-wider text-[var(--ink-muted)]">
-                Pack Preview
+                {t.packPreview}
               </span>
               <button
                 type="button"
@@ -346,7 +353,7 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                 className="inline-flex min-h-[44px] items-center gap-1.5 rounded-xl border-2 border-[var(--border-control)] bg-[var(--bg)] px-3 py-1.5 text-xs font-bold text-[var(--ink)] transition-colors hover:border-[var(--ink)] hover:bg-[var(--surface-tint)]"
               >
                 <ZoomIcon className="h-4 w-4" />
-                <span>Zoom preview</span>
+                <span>{t.zoomPreview}</span>
               </button>
             </div>
 
@@ -369,21 +376,17 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                     <CheckIcon className="h-3.5 w-3.5" />
                   </span>
                   <div>
-                    <p className="text-sm font-bold text-[var(--ink)]">
-                      Matches preview (default picks)
-                    </p>
+                    <p className="text-sm font-bold text-[var(--ink)]">{t.matchesPreviewTitle}</p>
                     <p className="mt-0.5 text-xs text-[var(--ink-muted)]">
-                      These options reproduce the sample look above. Swap any item on the right to customize.
+                      {t.matchesPreviewDesc}
                     </p>
                   </div>
                 </div>
               ) : (
                 <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <p className="text-sm font-bold text-[var(--ink)]">Custom booth combo</p>
-                    <p className="mt-0.5 text-xs text-[var(--ink-muted)]">
-                      Your generated strip will reflect your new picks rather than the sample preview.
-                    </p>
+                    <p className="text-sm font-bold text-[var(--ink)]">{t.customComboTitle}</p>
+                    <p className="mt-0.5 text-xs text-[var(--ink-muted)]">{t.customComboDesc}</p>
                   </div>
                   <button
                     type="button"
@@ -391,7 +394,7 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                     className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-1.5 rounded-xl border-2 border-[var(--ink)] bg-[var(--surface)] px-3 py-1.5 text-xs font-bold text-[var(--ink)] hover:bg-[var(--surface-tint)]"
                   >
                     <ResetIcon className="h-4 w-4" />
-                    <span>Reset defaults</span>
+                    <span>{t.resetDefaults}</span>
                   </button>
                 </div>
               )}
@@ -400,15 +403,15 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
             {/* Compact Live Selection Receipt */}
             <dl className="mt-4 grid grid-cols-2 gap-2.5 text-xs">
               <div className="rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] p-2.5">
-                <dt className="font-semibold text-[var(--ink-muted)]">Props</dt>
+                <dt className="font-semibold text-[var(--ink-muted)]">{t.receiptProps}</dt>
                 <dd className="mt-1 font-bold text-[var(--ink)]">
                   {[selectedHeadwear?.label, selectedEyewear?.label, selectedAccessory?.label]
                     .filter(Boolean)
-                    .join(', ') || 'None'}
+                    .join(', ') || t.noneLabel}
                 </dd>
               </div>
               <div className="rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] p-2.5">
-                <dt className="font-semibold text-[var(--ink-muted)]">Backdrop</dt>
+                <dt className="font-semibold text-[var(--ink-muted)]">{t.receiptBackdrop}</dt>
                 <dd className="mt-1 flex items-center gap-1.5 font-bold text-[var(--ink)]">
                   <span
                     className="inline-block h-3.5 w-3.5 shrink-0 rounded-full border border-[var(--ink)]"
@@ -419,11 +422,11 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                 </dd>
               </div>
               <div className="rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] p-2.5">
-                <dt className="font-semibold text-[var(--ink-muted)]">Pose</dt>
+                <dt className="font-semibold text-[var(--ink-muted)]">{t.receiptPose}</dt>
                 <dd className="mt-1 font-bold text-[var(--ink)]">{selectedPose?.label}</dd>
               </div>
               <div className="rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] p-2.5">
-                <dt className="font-semibold text-[var(--ink-muted)]">Mood</dt>
+                <dt className="font-semibold text-[var(--ink-muted)]">{t.receiptMood}</dt>
                 <dd className="mt-1 font-bold text-[var(--ink)]">{selectedMood?.label}</dd>
               </div>
             </dl>
@@ -435,11 +438,13 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
           <div className="rounded-[20px] border-2 border-[var(--ink)] bg-[var(--surface)] p-4 sm:p-6">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h2 className="text-xl font-extrabold">
-                Customize Your Booth{' '}
-                <span className="font-semibold text-[var(--ink-muted)]">옵션 선택</span>
+                {t.customizeHeading}{' '}
+                <span className="inline-block break-keep font-semibold text-[var(--ink-muted)]">
+                  옵션 선택
+                </span>
               </h2>
               <span className="text-xs font-bold text-[var(--ink-muted)]">
-                Step {activeStepIndex + 1} of {STEPS.length}
+                {t.stepOf(activeStepIndex + 1, STEP_META.length)}
               </span>
             </div>
 
@@ -447,11 +452,11 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
             <div
               {...({ focusgroup: 'tablist nomemory' } as Record<string, string>)}
               role="tablist"
-              aria-label="Prompt customization steps"
+              aria-label={t.stepsAria}
               onKeyDown={handleTabKeyDown}
               className="customizer-tablist mt-4"
             >
-              {STEPS.map((step) => {
+              {STEP_META.map((step) => {
                 const selected = activeStep === step.id;
                 return (
                   <button
@@ -471,7 +476,7 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                     <span className="font-mono text-xs font-bold text-[var(--accent-text)]">
                       {step.num}
                     </span>
-                    <span>{step.label}</span>
+                    <span>{t.stepLabels[step.id]}</span>
                     <span className="text-xs opacity-75">{step.labelKo}</span>
                   </button>
                 );
@@ -491,52 +496,36 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                 className="col-start-1 row-start-1"
               >
                 <div className="space-y-6">
-                  <p className="text-sm text-[var(--ink-muted)]">
-                    Pick up to one item per slot. Selected prop images are added to your numbered download kit so Gemini reproduces their look accurately.
-                  </p>
+                  <p className="text-sm text-[var(--ink-muted)]">{t.propsIntro}</p>
 
                   {(
                     [
-                      {
-                        slot: 'headwear',
-                        title: 'Headwear',
-                        titleKo: '머리 소품',
-                        allowedIds: pack.allowed.headwear,
-                      },
-                      {
-                        slot: 'eyewear',
-                        title: 'Eyewear',
-                        titleKo: '안경 & 선글라스',
-                        allowedIds: pack.allowed.eyewear,
-                      },
-                      {
-                        slot: 'accessory',
-                        title: 'Hands & Extras',
-                        titleKo: '손 소품',
-                        allowedIds: pack.allowed.accessory,
-                      },
+                      { slot: 'headwear', allowedIds: pack.allowed.headwear },
+                      { slot: 'eyewear', allowedIds: pack.allowed.eyewear },
+                      { slot: 'accessory', allowedIds: pack.allowed.accessory },
                     ] as const
                   ).map((group) => {
                     if (group.allowedIds.length === 0) return null;
+                    const slotText = t.propSlots[group.slot];
                     const currentVal = selection[group.slot];
                     return (
                       <div key={group.slot}>
                         <div className="mb-2.5 flex items-baseline justify-between">
                           <h3 className="text-sm font-extrabold text-[var(--ink)]">
-                            {group.title}{' '}
+                            {slotText.title}{' '}
                             <span className="font-semibold text-[var(--ink-muted)]">
-                              {group.titleKo}
+                              {slotText.titleKo}
                             </span>
                           </h3>
                           <span className="text-xs font-semibold text-[var(--ink-muted)]">
-                            {currentVal ? library.props[currentVal]?.label : 'None selected'}
+                            {currentVal ? library.props[currentVal]?.label : t.noneSelected}
                           </span>
                         </div>
 
                         <div
                           className="grid grid-cols-2 gap-3 sm:grid-cols-4"
                           role="group"
-                          aria-label={`${group.title} options`}
+                          aria-label={slotText.title}
                         >
                           <button
                             type="button"
@@ -553,9 +542,9 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                               OFF
                             </span>
                             <span className="mt-2.5 text-xs font-bold text-[var(--ink)]">
-                              No {group.title.toLowerCase()}
+                              {slotText.none}
                             </span>
-                            <span className="text-[11px] text-[var(--ink-muted)]">없음</span>
+                            <span className="text-[11px] text-[var(--ink-muted)]">{t.noneKo}</span>
                           </button>
 
                           {group.allowedIds.map((id) => {
@@ -620,13 +609,11 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                 className="col-start-1 row-start-1"
               >
                 <div>
-                  <p className="mb-4 text-sm text-[var(--ink-muted)]">
-                    Choose a pastel curtain or cute studio wallpaper. The chosen backdrop image is bundled into your download kit so lighting matches naturally.
-                  </p>
+                  <p className="mb-4 text-sm text-[var(--ink-muted)]">{t.backdropIntro}</p>
                   <div
                     className="grid grid-cols-2 gap-3 sm:grid-cols-3"
                     role="group"
-                    aria-label="Backdrop options"
+                    aria-label={t.stepLabels.backdrop}
                   >
                     {pack.allowed.backdrops.map((id) => {
                       const bg = library.backdrops[id];
@@ -667,7 +654,7 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                             </span>
                             <span className="mt-0.5 flex items-center justify-between text-[11px] text-[var(--ink-muted)]">
                               <span>{bg.labelKo}</span>
-                              <span className="capitalize">{bg.kind}</span>
+                              <span>{t.backdropKind[bg.kind]}</span>
                             </span>
                           </div>
                         </button>
@@ -688,13 +675,11 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                 className="col-start-1 row-start-1"
               >
                 <div>
-                  <p className="mb-4 text-sm text-[var(--ink-muted)]">
-                    Pick a pose direction. Pose previews are visual guides only and stay text-only in the prompt so Gemini keeps your own face from Image 1.
-                  </p>
+                  <p className="mb-4 text-sm text-[var(--ink-muted)]">{t.poseIntro}</p>
                   <div
                     className="grid grid-cols-1 gap-3 sm:grid-cols-2"
                     role="group"
-                    aria-label="Pose pack options"
+                    aria-label={t.stepLabels.pose}
                   >
                     {pack.allowed.poses.map((id) => {
                       const pose = library.poses[id];
@@ -758,13 +743,11 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                 className="col-start-1 row-start-1"
               >
                 <div>
-                  <p className="mb-4 text-sm text-[var(--ink-muted)]">
-                    Set the booth flash lighting and film color finish.
-                  </p>
+                  <p className="mb-4 text-sm text-[var(--ink-muted)]">{t.moodIntro}</p>
                   <div
                     className="grid grid-cols-1 gap-3 sm:grid-cols-2"
                     role="group"
-                    aria-label="Lighting and film mood options"
+                    aria-label={t.stepLabels.mood}
                   >
                     {pack.allowed.moods.map((id) => {
                       const mood = library.moods[id];
@@ -820,28 +803,28 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
               <button
                 type="button"
                 disabled={activeStepIndex === 0}
-                onClick={() => selectStep(STEPS[activeStepIndex - 1].id)}
+                onClick={() => selectStep(STEP_META[activeStepIndex - 1].id)}
                 className="btn-outline"
               >
-                Previous step
+                {t.prevStep}
               </button>
 
-              {activeStepIndex < STEPS.length - 1 ? (
+              {activeStepIndex < STEP_META.length - 1 ? (
                 <button
                   type="button"
-                  onClick={() => selectStep(STEPS[activeStepIndex + 1].id)}
+                  onClick={() => selectStep(STEP_META[activeStepIndex + 1].id)}
                   className="btn-outline"
                 >
-                  Next: {STEPS[activeStepIndex + 1].label}
+                  {t.nextStep(t.stepLabels[STEP_META[activeStepIndex + 1].id])}
                 </button>
               ) : !isRevealed ? (
                 <button type="button" onClick={handleReveal} className="btn-booth">
                   <CameraIcon className="h-5 w-5" />
-                  <span>Reveal prompt · 찰칵!</span>
+                  <span>{t.revealBtn}</span>
                 </button>
               ) : (
                 <span className="text-xs font-bold text-[var(--success-text)]">
-                  Prompt ready below
+                  {t.promptReadyBelow}
                 </span>
               )}
             </div>
@@ -860,20 +843,20 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                   </span>
                   <div>
                     <h2 className="text-lg font-extrabold">
-                      Ready to develop your prompt?{' '}
-                      <span className="font-semibold text-[var(--ink-muted)]">프롬프트 확인</span>
+                      {t.readyHeading}{' '}
+                      <span className="inline-block break-keep font-semibold text-[var(--ink-muted)]">
+                        프롬프트 확인
+                      </span>
                     </h2>
                     <p className="mt-1 text-sm text-[var(--ink-muted)]">
-                      Your kit prepares {downloadableFiles.length} numbered reference{' '}
-                      {downloadableFiles.length === 1 ? 'file' : 'files'} plus your selfie (
-                      {compiled.attachments.length} images total for Gemini).
+                      {t.readyDesc(downloadableFiles.length, compiled.attachments.length)}
                     </p>
                   </div>
                 </div>
 
                 <button type="button" onClick={handleReveal} className="btn-booth shrink-0">
                   <CameraIcon className="h-5 w-5" />
-                  <span>Reveal prompt · 찰칵!</span>
+                  <span>{t.revealBtn}</span>
                 </button>
               </div>
             ) : (
@@ -881,19 +864,19 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div>
                     <h2 className="text-xl font-extrabold">
-                      Your Custom Prompt & Kit{' '}
-                      <span className="font-semibold text-[var(--ink-muted)]">완성!</span>
+                      {t.revealedHeading}{' '}
+                      <span className="inline-block break-keep font-semibold text-[var(--ink-muted)]">
+                        완성!
+                      </span>
                     </h2>
-                    <p className="mt-0.5 text-xs text-[var(--ink-muted)]">
-                      Changing any option above updates this prompt and file numbering automatically.
-                    </p>
+                    <p className="mt-0.5 text-xs text-[var(--ink-muted)]">{t.revealedDesc}</p>
                   </div>
                   <button
                     type="button"
                     onClick={() => setIsRevealed(false)}
                     className="inline-flex min-h-[44px] items-center rounded-lg px-3 text-xs font-bold text-[var(--ink-muted)] underline underline-offset-4 hover:text-[var(--ink)]"
                   >
-                    Hide prompt
+                    {t.hidePrompt}
                   </button>
                 </div>
 
@@ -903,12 +886,12 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                     {copyStatus === 'copied' ? (
                       <>
                         <CheckIcon className="h-5 w-5" />
-                        <span>Prompt copied</span>
+                        <span>{t.promptCopied}</span>
                       </>
                     ) : (
                       <>
                         <CopyIcon className="h-5 w-5" />
-                        <span>Copy prompt</span>
+                        <span>{t.copyPrompt}</span>
                       </>
                     )}
                   </button>
@@ -922,10 +905,10 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                     <DownloadIcon className="h-5 w-5" />
                     <span>
                       {zipStatus === 'loading'
-                        ? 'Packing ZIP...'
+                        ? t.packingZip
                         : zipStatus === 'done'
-                          ? 'Kit ZIP saved'
-                          : `Download kit ZIP (${downloadableFiles.length} files)`}
+                          ? t.zipSaved
+                          : t.downloadZip(downloadableFiles.length)}
                     </span>
                   </button>
 
@@ -935,18 +918,17 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                     rel="noopener noreferrer"
                     className="btn-outline no-underline"
                   >
-                    <span>Open Gemini app</span>
+                    <span>{t.openGemini}</span>
                     <ExternalLinkIcon className="h-4 w-4" />
                   </a>
                 </div>
 
-                {/* Explicit error states for clipboard or ZIP */}
                 {copyStatus === 'error' && (
                   <p
                     role="alert"
                     className="mt-3 rounded-xl border-2 border-[var(--error-text)] bg-[var(--error-bg)] px-3.5 py-2.5 text-sm font-semibold text-[var(--error-text)]"
                   >
-                    Browser blocked automatic copy. Select the prompt text in the box below and copy manually.
+                    {t.copyError}
                   </p>
                 )}
 
@@ -955,15 +937,15 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                     role="alert"
                     className="mt-3 rounded-xl border-2 border-[var(--error-text)] bg-[var(--error-bg)] px-3.5 py-2.5 text-sm font-semibold text-[var(--error-text)]"
                   >
-                    Could not build the ZIP file ({zipError}). Use the individual Save buttons in the checklist below instead.
+                    {t.zipError(zipError)}
                   </p>
                 )}
 
                 {/* Compiled Prompt Text Box */}
                 <div className="mt-5">
                   <div className="mb-1.5 flex items-center justify-between text-xs font-bold text-[var(--ink-muted)]">
-                    <span>Compiled Gemini Prompt</span>
-                    <span>{compiled.prompt.length} chars</span>
+                    <span>{t.compiledLabel}</span>
+                    <span>{t.charCount(compiled.prompt.length)}</span>
                   </div>
                   <pre className="max-h-72 overflow-y-auto whitespace-pre-wrap break-words rounded-[14px] border-2 border-[var(--ink)] bg-[var(--bg)] p-4 font-mono text-xs leading-relaxed text-[var(--ink)] sm:text-[13px]">
                     {compiled.prompt}
@@ -973,11 +955,9 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                 {/* Numbered Attachment Kit Checklist */}
                 <div className="mt-6">
                   <h3 className="text-base font-extrabold text-[var(--ink)]">
-                    Numbered Attachment Order ({compiled.attachments.length} images)
+                    {t.attachmentHeading(compiled.attachments.length)}
                   </h3>
-                  <p className="mt-1 text-xs text-[var(--ink-muted)]">
-                    Attach these in order inside one Gemini chat message so Image 1, Image 2, and so on match the prompt. On phones, save individual files directly if you prefer not to unzip.
-                  </p>
+                  <p className="mt-1 text-xs text-[var(--ink-muted)]">{t.attachmentDesc}</p>
 
                   <ol className="mt-3 space-y-2.5">
                     {compiled.attachments.map((item) => (
@@ -1005,10 +985,11 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                           )}
                           <div className="min-w-0">
                             <p className="text-sm font-bold text-[var(--ink)]">
-                              Image {item.imageNumber}: {item.label}
+                              Image {item.imageNumber}:{' '}
+                              {item.isUserSelfie ? t.yourSelfie : item.label}
                             </p>
                             <p className="truncate font-mono text-xs text-[var(--ink-muted)]">
-                              {item.filename}
+                              {item.isUserSelfie ? t.selfieFilename : item.filename}
                             </p>
                           </div>
                         </div>
@@ -1020,11 +1001,11 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                             className="inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-lg border-2 border-[var(--border-control)] bg-[var(--surface)] px-3 py-1.5 text-xs font-bold text-[var(--ink)] no-underline hover:border-[var(--ink)] hover:bg-[var(--surface-tint)]"
                           >
                             <DownloadIcon className="h-4 w-4" />
-                            <span>Save file</span>
+                            <span>{t.saveFile}</span>
                           </a>
                         ) : (
                           <span className="rounded-md bg-[var(--surface)] px-2.5 py-1 text-xs font-semibold text-[var(--ink-muted)]">
-                            Upload from your device first
+                            {t.uploadFirstBadge}
                           </span>
                         )}
                       </li>
@@ -1035,11 +1016,11 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                 {/* Inline Usage Steps */}
                 <div className="mt-6 rounded-xl border-2 border-[var(--border-subtle)] bg-[var(--surface-tint)] p-4">
                   <h3 className="text-sm font-extrabold text-[var(--ink)]">
-                    Quick run checklist for Gemini
+                    {t.quickGuideHeading}
                   </h3>
                   <ol className="mt-2 list-decimal space-y-1.5 pl-5 text-xs leading-relaxed text-[var(--ink)] sm:text-sm">
                     <li>
-                      Download the ZIP kit (or save each numbered file above) and open{' '}
+                      {t.quickGuideStep1Prefix}
                       <a
                         href={SITE_CONFIG.geminiAppUrl}
                         target="_blank"
@@ -1048,15 +1029,14 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
                       >
                         gemini.google.com
                       </a>
-                      .
+                      {t.quickGuideStep1Suffix}
                     </li>
                     <li>
-                      Attach a clear, front-facing selfie first (Image 1), then attach{' '}
-                      {downloadableFiles.map((f) => `Image ${f.imageNumber}`).join(', ')} in order.
+                      {t.quickGuideStep2(
+                        downloadableFiles.map((f) => `Image ${f.imageNumber}`).join(', ')
+                      )}
                     </li>
-                    <li>
-                      Paste the copied prompt and send. Free Google accounts get daily image generations built into the Gemini app.
-                    </li>
+                    <li>{t.quickGuideStep3}</li>
                   </ol>
                 </div>
               </div>
@@ -1075,12 +1055,12 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
         <div className="p-4 sm:p-5">
           <div className="flex items-center justify-between gap-4 border-b-2 border-[var(--border-subtle)] pb-3">
             <h2 id="lightbox-title" className="text-base font-extrabold">
-              {pack.title} preview
+              {t.lightboxTitle(pack.title)}
             </h2>
             <button
               type="button"
               onClick={() => lightboxRef.current?.close()}
-              aria-label="Close preview lightbox"
+              aria-label={t.lightboxCloseAria}
               className="inline-flex h-11 w-11 items-center justify-center rounded-xl border-2 border-[var(--ink)] bg-[var(--surface)] text-[var(--ink)] hover:bg-[var(--surface-tint)]"
             >
               <CloseIcon className="h-5 w-5" />
@@ -1095,9 +1075,7 @@ export default function PackCustomizer({ pack, library }: PackCustomizerProps) {
               className="mx-auto block max-h-[72dvh] w-auto max-w-full object-contain"
             />
           </div>
-          <p className="mt-3 text-center text-xs text-[var(--ink-muted)]">
-            Click outside this frame or press Esc to close.
-          </p>
+          <p className="mt-3 text-center text-xs text-[var(--ink-muted)]">{t.lightboxHint}</p>
         </div>
       </dialog>
     </div>

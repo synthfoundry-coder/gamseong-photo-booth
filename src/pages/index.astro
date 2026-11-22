@@ -8,8 +8,9 @@ const featuredPack = packs[0];
 ---
 
 <BaseLayout
-  title="GAMSEONG PHOTO (감성네컷) · Korean Photo-Booth Prompt Packs for Gemini"
-  description="Browse Korean Life4Cuts, Polaroid, and Haru Film prompt packs. Customize props, backdrops, poses, and moods with visual cards, then download your numbered reference kit for the free Gemini app."
+  title="GAMSEONG PHOTO (감성네컷) · Koleksi Prompt Photo Booth Korea untuk Gemini"
+  titleEn="GAMSEONG PHOTO (감성네컷) · Korean Photo-Booth Prompt Packs for Gemini"
+  description="Pilih pack prompt Life4Cuts, Polaroid, dan Haru Film ala Korea. Atur properti, latar pastel, pose, dan nuansa film lewat kartu gambar, lalu unduh paket referensi bernomor untuk aplikasi Gemini gratis."
   ogImage={featuredPack?.previewImage ?? '/assets/packs/bunny-4cut/preview.png'}
   currentPath="/"
 >
@@ -18,40 +19,60 @@ const featuredPack = packs[0];
     <section class="grid grid-cols-1 items-center gap-8 pb-12 md:grid-cols-12 md:gap-10 md:pb-16">
       <div class="md:col-span-7">
         <h1 class="text-[clamp(2rem,4.8vw,3.4rem)] font-extrabold leading-[1.08] tracking-tight text-[var(--ink)]">
-          Korean photo-booth prompt packs, ready for Gemini.
+          <span data-lang-block="id">Koleksi prompt photo booth Korea, siap pakai di Gemini.</span>
+          <span data-lang-block="en">Korean photo-booth prompt packs, ready for Gemini.</span>
         </h1>
 
         <p class="mt-4 max-w-xl text-base leading-relaxed text-[var(--ink-muted)] sm:text-lg">
-          Pick a Life4Cuts, Polaroid, or Haru Film layout, choose your props and pastel backdrop from visual cards, then reveal your prompt and numbered reference kit. Generate on your own free Gemini account with no API key or login.
+          <span data-lang-block="id">
+            Pilih format Life4Cuts, Polaroid, atau Haru Film, ganti properti dan latar pastel lewat kartu gambar, lalu buka prompt beserta paket file referensi bernomor. Buat fotonya langsung di akun Gemini gratis kamu, tanpa API key atau login.
+          </span>
+          <span data-lang-block="en">
+            Pick a Life4Cuts, Polaroid, or Haru Film layout, choose your props and pastel backdrop from visual cards, then reveal your prompt and numbered reference kit. Generate on your own free Gemini account with no API key or login.
+          </span>
         </p>
 
         <div class="mt-7 flex flex-wrap items-center gap-3.5">
           <a href="#packs" class="btn-booth no-underline">
-            Browse prompt packs
+            <span data-lang-block="id">Lihat koleksi prompt</span>
+            <span data-lang-block="en">Browse prompt packs</span>
           </a>
           <a href="/how-to" class="btn-outline no-underline">
-            How to run a kit in Gemini
+            <span data-lang-block="id">Baca panduan Gemini</span>
+            <span data-lang-block="en">How to run a kit in Gemini</span>
           </a>
         </div>
 
         <dl class="mt-8 grid max-w-lg grid-cols-2 gap-4 border-t-2 border-[var(--border-subtle)] pt-5 text-sm sm:grid-cols-3">
           <div>
             <dt class="text-xs font-bold uppercase tracking-wider text-[var(--ink-muted)]">
-              Access
+              <span data-lang-block="id">Akses</span>
+              <span data-lang-block="en">Access</span>
             </dt>
-            <dd class="mt-1 font-bold text-[var(--ink)]">Free, no login</dd>
+            <dd class="mt-1 font-bold text-[var(--ink)]">
+              <span data-lang-block="id">Gratis, tanpa login</span>
+              <span data-lang-block="en">Free, no login</span>
+            </dd>
           </div>
           <div>
             <dt class="text-xs font-bold uppercase tracking-wider text-[var(--ink-muted)]">
-              Output tool
+              <span data-lang-block="id">Aplikasi</span>
+              <span data-lang-block="en">Output tool</span>
             </dt>
-            <dd class="mt-1 font-bold text-[var(--ink)]">Gemini app</dd>
+            <dd class="mt-1 font-bold text-[var(--ink)]">
+              <span data-lang-block="id">Aplikasi Gemini</span>
+              <span data-lang-block="en">Gemini app</span>
+            </dd>
           </div>
           <div class="col-span-2 sm:col-span-1">
             <dt class="text-xs font-bold uppercase tracking-wider text-[var(--ink-muted)]">
-              Includes
+              <span data-lang-block="id">Isi paket</span>
+              <span data-lang-block="en">Includes</span>
             </dt>
-            <dd class="mt-1 font-bold text-[var(--ink)]">Prompt + numbered ZIP</dd>
+            <dd class="mt-1 font-bold text-[var(--ink)]">
+              <span data-lang-block="id">Prompt + ZIP bernomor</span>
+              <span data-lang-block="en">Prompt + numbered ZIP</span>
+            </dd>
           </div>
         </dl>
       </div>
@@ -62,16 +83,18 @@ const featuredPack = packs[0];
             <div class="mx-auto max-w-[320px] rounded-[20px] border-2 border-[var(--ink)] bg-[var(--surface)] p-4 shadow-[5px_5px_0_var(--ink)]">
               <div class="mb-3 flex items-center justify-between gap-2 text-xs font-bold">
                 <span class="rounded-md border border-[var(--ink)] bg-[var(--accent)] px-2.5 py-1 text-[var(--on-accent)]">
-                  Featured · {featuredPack.formatLabelKo}
+                  <span data-lang-block="id">Pilihan · {featuredPack.formatLabelKo}</span>
+                  <span data-lang-block="en">Featured · {featuredPack.formatLabelKo}</span>
                 </span>
                 <span class="rounded-md border border-[var(--border-control)] bg-[var(--bg)] px-2 py-1 text-[var(--ink-muted)]">
-                  SAMPLE
+                  <span data-lang-block="id">SAMPEL</span>
+                  <span data-lang-block="en">SAMPLE</span>
                 </span>
               </div>
 
               <a
                 href={`/pack/${featuredPack.slug}`}
-                className="block overflow-hidden rounded-2xl border-2 border-[var(--ink)] bg-[var(--bg)]"
+                class="block overflow-hidden rounded-2xl border-2 border-[var(--ink)] bg-[var(--bg)]"
               >
                 <img
                   src={featuredPack.previewImage}
@@ -79,7 +102,7 @@ const featuredPack = packs[0];
                   width={featuredPack.previewWidth}
                   height={featuredPack.previewHeight}
                   fetchpriority="high"
-                  className="mx-auto block max-h-[390px] w-full object-contain"
+                  class="mx-auto block max-h-[390px] w-full object-contain"
                 />
               </a>
 
@@ -89,14 +112,20 @@ const featuredPack = packs[0];
                     {featuredPack.title}
                   </p>
                   <p class="text-xs font-semibold text-[var(--ink-muted)]">
-                    {featuredPack.titleKo} · {featuredPack.cuts} cuts
+                    <span data-lang-block="id">
+                      {featuredPack.titleKo} · {featuredPack.cuts} foto
+                    </span>
+                    <span data-lang-block="en">
+                      {featuredPack.titleKo} · {featuredPack.cuts} cuts
+                    </span>
                   </p>
                 </div>
                 <a
                   href={`/pack/${featuredPack.slug}`}
                   class="inline-flex min-h-[44px] shrink-0 items-center rounded-xl border-2 border-[var(--ink)] bg-[var(--surface-tint)] px-3.5 py-2 text-xs font-extrabold text-[var(--ink)] no-underline transition-colors hover:bg-[var(--accent)]"
                 >
-                  Open pack
+                  <span data-lang-block="id">Buka pack</span>
+                  <span data-lang-block="en">Open pack</span>
                 </a>
               </div>
             </div>
@@ -116,14 +145,25 @@ const featuredPack = packs[0];
       <div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
         <div>
           <h2 id="flow-heading" class="text-xl font-extrabold sm:text-2xl">
-            Why the numbered kit works better than text alone
+            <span data-lang-block="id">
+              Kenapa paket file bernomor hasilnya lebih akurat daripada teks saja
+            </span>
+            <span data-lang-block="en">
+              Why the numbered kit works better than text alone
+            </span>
           </h2>
           <p class="mt-1 max-w-2xl text-sm text-[var(--ink-muted)]">
-            Text prompts alone drift on strip proportions and prop details. Each pack pairs your customized prompt with matching reference images numbered for Gemini.
+            <span data-lang-block="id">
+              Prompt teks saja sering meleset soal proporsi strip dan detail properti. Setiap pack memadukan prompt pilihanmu dengan gambar referensi bernomor yang siap diunggah ke Gemini.
+            </span>
+            <span data-lang-block="en">
+              Text prompts alone drift on strip proportions and prop details. Each pack pairs your customized prompt with matching reference images numbered for Gemini.
+            </span>
           </p>
         </div>
         <a href="/how-to" class="btn-outline shrink-0 self-start no-underline md:self-auto">
-          Full guide
+          <span data-lang-block="id">Panduan lengkap</span>
+          <span data-lang-block="en">Full guide</span>
         </a>
       </div>
 
@@ -132,27 +172,51 @@ const featuredPack = packs[0];
           <span class="inline-block rounded-md border border-[var(--ink)] bg-[var(--accent)] px-2 py-0.5 font-mono text-xs font-extrabold text-[var(--on-accent)]">
             01
           </span>
-          <h3 class="mt-2.5 text-base font-extrabold">Pick your props and backdrop</h3>
+          <h3 class="mt-2.5 text-base font-extrabold">
+            <span data-lang-block="id">Pilih properti dan latar</span>
+            <span data-lang-block="en">Pick your props and backdrop</span>
+          </h3>
           <p class="mt-1 text-sm leading-relaxed text-[var(--ink-muted)]">
-            Select up to one prop per slot (headwear, eyewear, hands) plus a pastel or wallpaper backdrop. Poses stay text-only so Gemini keeps your own face.
+            <span data-lang-block="id">
+              Pilih maksimal satu properti per slot (kepala, kacamata, tangan) plus latar pastel atau wallpaper. Pose tetap berupa teks agar Gemini menjaga wajah aslimu.
+            </span>
+            <span data-lang-block="en">
+              Select up to one prop per slot (headwear, eyewear, hands) plus a pastel or wallpaper backdrop. Poses stay text-only so Gemini keeps your own face.
+            </span>
           </p>
         </li>
         <li class="rounded-2xl border-2 border-[var(--border-subtle)] bg-[var(--bg)] p-4">
           <span class="inline-block rounded-md border border-[var(--ink)] bg-[var(--accent)] px-2 py-0.5 font-mono text-xs font-extrabold text-[var(--on-accent)]">
             02
           </span>
-          <h3 class="mt-2.5 text-base font-extrabold">Reveal prompt and download kit</h3>
+          <h3 class="mt-2.5 text-base font-extrabold">
+            <span data-lang-block="id">Buka prompt dan unduh paket</span>
+            <span data-lang-block="en">Reveal prompt and download kit</span>
+          </h3>
           <p class="mt-1 text-sm leading-relaxed text-[var(--ink-muted)]">
-            Tap Reveal prompt (찰칵!) to compile the exact prompt and package your strip template, prop images, and backdrop as numbered files (02, 03, 04...).
+            <span data-lang-block="id">
+              Klik Tampilkan prompt (찰칵!) untuk menyusun prompt lengkap dan mengemas template strip, gambar properti, serta latar jadi file bernomor (02, 03, 04...).
+            </span>
+            <span data-lang-block="en">
+              Tap Reveal prompt (찰칵!) to compile the exact prompt and package your strip template, prop images, and backdrop as numbered files (02, 03, 04...).
+            </span>
           </p>
         </li>
         <li class="rounded-2xl border-2 border-[var(--border-subtle)] bg-[var(--bg)] p-4">
           <span class="inline-block rounded-md border border-[var(--ink)] bg-[var(--accent)] px-2 py-0.5 font-mono text-xs font-extrabold text-[var(--on-accent)]">
             03
           </span>
-          <h3 class="mt-2.5 text-base font-extrabold">Attach in Gemini and generate</h3>
+          <h3 class="mt-2.5 text-base font-extrabold">
+            <span data-lang-block="id">Unggah di Gemini lalu buat</span>
+            <span data-lang-block="en">Attach in Gemini and generate</span>
+          </h3>
           <p class="mt-1 text-sm leading-relaxed text-[var(--ink-muted)]">
-            Upload your selfie first (Image 1), attach the numbered kit images in order, paste the prompt in gemini.google.com, and send.
+            <span data-lang-block="id">
+              Unggah foto selfiemu dulu sebagai Image 1, lampirkan gambar paket bernomor secara berurutan, tempel prompt di gemini.google.com, lalu kirim.
+            </span>
+            <span data-lang-block="en">
+              Upload your selfie first (Image 1), attach the numbered kit images in order, paste the prompt in gemini.google.com, and send.
+            </span>
           </p>
         </li>
       </ol>

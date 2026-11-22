@@ -81,6 +81,16 @@
   }
 }
 
+/* Instant zero-flash language visibility for static Astro content (default: Indonesian) */
+html[data-lang="id"] [data-lang-block="en"],
+html:not([data-lang]) [data-lang-block="en"] {
+  display: none !important;
+}
+
+html[data-lang="en"] [data-lang-block="id"] {
+  display: none !important;
+}
+
 @layer base {
   html {
     background-color: var(--bg);

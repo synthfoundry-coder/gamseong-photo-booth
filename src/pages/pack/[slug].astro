@@ -17,7 +17,8 @@ const { pack, library } = Astro.props;
 
 <BaseLayout
   title={`${pack.title} (${pack.titleKo}) · GAMSEONG PHOTO`}
-  description={`${pack.subtitle} Customize props, backdrop, pose, and film mood, then download the numbered Gemini kit.`}
+  titleEn={`${pack.title} (${pack.titleKo}) · GAMSEONG PHOTO`}
+  description={`${pack.subtitle} Atur properti, latar, pose, dan nuansa film lalu unduh paket referensi Gemini bernomor.`}
   ogImage={pack.previewImage}
   currentPath={`/pack/${pack.slug}`}
 >
@@ -29,7 +30,8 @@ const { pack, library } = Astro.props;
             href="/"
             class="inline-flex min-h-[44px] items-center rounded-lg px-2 py-1 text-[var(--ink)] underline-offset-4 hover:underline"
           >
-            Prompt Packs
+            <span data-lang-block="id">Koleksi Prompt</span>
+            <span data-lang-block="en">Prompt Packs</span>
           </a>
         </li>
         <li aria-hidden="true">/</li>

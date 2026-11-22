@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { attachLightDismissFallback } from '../lib/dialogFallback';
+import { UI_TEXT, useLang } from '../lib/i18n';
 import { CloseIcon, MenuIcon } from './Icons';
 import ThemeSwitcher from './ThemeSwitcher';
 
@@ -9,6 +10,8 @@ interface MobileMenuDialogProps {
 
 export default function MobileMenuDialog({ currentPath }: MobileMenuDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const lang = useLang();
+  const t = UI_TEXT[lang].nav;
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -25,8 +28,8 @@ export default function MobileMenuDialog({ currentPath }: MobileMenuDialogProps)
   }
 
   const navItems = [
-    { href: '/', label: 'Prompt Packs', labelKo: '프롬프트 팩' },
-    { href: '/how-to', label: 'How to Use in Gemini', labelKo: '사용 방법' },
+    { href: '/', label: t.packs, labelKo: '프롬프트 팩' },
+    { href: '/how-to', label: t.howToFull, labelKo: '사용 방법' },
   ];
 
   return (
@@ -35,10 +38,10 @@ export default function MobileMenuDialog({ currentPath }: MobileMenuDialogProps)
         type="button"
         onClick={openMenu}
         aria-haspopup="dialog"
-        className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border-2 border-[var(--ink)] bg-[var(--surface)] px-3.5 py-2 text-sm font-bold text-[var(--ink)] transition-colors hover:bg-[var(--surface-tint)]"
+        className="inline-flex min-h-[44px] items-center gap-1.5 rounded-xl border-2 border-[var(--ink)] bg-[var(--surface)] px-3 py-2 text-xs font-bold text-[var(--ink)] transition-colors hover:bg-[var(--surface-tint)]"
       >
         <MenuIcon className="h-5 w-5" />
-        <span>Menu</span>
+        <span>{t.menu}</span>
       </button>
 
       <dialog
@@ -50,19 +53,22 @@ export default function MobileMenuDialog({ currentPath }: MobileMenuDialogProps)
         <div className="p-5">
           <div className="flex items-center justify-between gap-4 border-b-2 border-[var(--border-subtle)] pb-4">
             <h2 id="mobile-menu-title" className="text-lg font-extrabold">
-              GAMSEONG PHOTO <span className="font-semibold text-[var(--ink-muted)]">감성네컷</span>
+              GAMSEONG PHOTO{' '}
+              <span className="inline-block break-keep font-semibold text-[var(--ink-muted)]">
+                감성네컷
+              </span>
             </h2>
             <button
               type="button"
               onClick={closeMenu}
-              aria-label="Close menu"
+              aria-label={t.closeMenu}
               className="inline-flex h-11 w-11 items-center justify-center rounded-xl border-2 border-[var(--ink)] bg-[var(--surface)] text-[var(--ink)] hover:bg-[var(--surface-tint)]"
             >
               <CloseIcon className="h-5 w-5" />
             </button>
           </div>
 
-          <nav aria-label="Mobile navigation" className="mt-4 flex flex-col gap-2">
+          <nav aria-label="Navigasi seluler" className="mt-4 flex flex-col gap-2">
             {navItems.map((item) => {
               const isCurrent =
                 item.href === '/'
@@ -88,7 +94,7 @@ export default function MobileMenuDialog({ currentPath }: MobileMenuDialogProps)
           </nav>
 
           <div className="mt-5 flex items-center justify-between border-t-2 border-[var(--border-subtle)] pt-4">
-            <span className="text-sm font-semibold text-[var(--ink-muted)]">Booth Color</span>
+            <span className="text-sm font-semibold text-[var(--ink-muted)]">{t.boothColor}</span>
             <ThemeSwitcher />
           </div>
         </div>
