@@ -7,7 +7,11 @@
   "formatLabel": "Single Polaroid",
   "formatLabelKo": "폴라로이드",
   "cuts": 1,
-  "tags": ["Film", "Cozy", "Minimal"],
+  "tags": [
+    "Film",
+    "Cozy",
+    "Minimal"
+  ],
   "isNew": false,
   "isSample": true,
   "premium": false,
@@ -25,12 +29,37 @@
     }
   ],
   "allowed": {
-    "headwear": ["cream-beret", "bunny-ears", "pink-bandana"],
-    "eyewear": ["round-glasses", "heart-glasses"],
-    "accessory": ["mini-bouquet", "bear-mittens"],
-    "backdrops": ["butter-yellow", "mint-cream", "strawberry-milk", "doodle-hearts", "gingham-pink"],
-    "poses": ["chic-editorial", "cute-classic", "heart-overload"],
-    "moods": ["warm-film", "soft-studio", "classic-bw", "dreamy-pastel"]
+    "headwear": [
+      "cream-beret",
+      "bunny-ears",
+      "pink-bandana"
+    ],
+    "eyewear": [
+      "round-glasses",
+      "heart-glasses"
+    ],
+    "accessory": [
+      "mini-bouquet",
+      "bear-mittens"
+    ],
+    "backdrops": [
+      "butter-yellow",
+      "mint-cream",
+      "strawberry-milk",
+      "doodle-hearts",
+      "gingham-pink"
+    ],
+    "poses": [
+      "chic-editorial",
+      "cute-classic",
+      "heart-overload"
+    ],
+    "moods": [
+      "warm-film",
+      "soft-studio",
+      "classic-bw",
+      "dreamy-pastel"
+    ]
   },
   "defaults": {
     "headwear": "cream-beret",

@@ -7,7 +7,11 @@
   "formatLabel": "Haru Film 2x2",
   "formatLabelKo": "하루필름",
   "cuts": 4,
-  "tags": ["Y2K", "Cute", "Wallpaper"],
+  "tags": [
+    "Y2K",
+    "Cute",
+    "Wallpaper"
+  ],
   "isNew": true,
   "isSample": true,
   "premium": false,
@@ -25,12 +29,39 @@
     }
   ],
   "allowed": {
-    "headwear": ["pink-bandana", "bunny-ears", "cream-beret"],
-    "eyewear": ["star-glasses", "heart-glasses", "round-glasses"],
-    "accessory": ["mini-bouquet", "bear-mittens"],
-    "backdrops": ["pastel-clouds", "baby-blue", "soft-lilac", "gingham-pink", "mint-cream"],
-    "poses": ["funny-playful", "cute-classic", "heart-overload", "chic-editorial"],
-    "moods": ["dreamy-pastel", "soft-studio", "warm-film", "classic-bw"]
+    "headwear": [
+      "pink-bandana",
+      "bunny-ears",
+      "cream-beret"
+    ],
+    "eyewear": [
+      "star-glasses",
+      "heart-glasses",
+      "round-glasses"
+    ],
+    "accessory": [
+      "mini-bouquet",
+      "bear-mittens"
+    ],
+    "backdrops": [
+      "pastel-clouds",
+      "baby-blue",
+      "soft-lilac",
+      "gingham-pink",
+      "mint-cream"
+    ],
+    "poses": [
+      "funny-playful",
+      "cute-classic",
+      "heart-overload",
+      "chic-editorial"
+    ],
+    "moods": [
+      "dreamy-pastel",
+      "soft-studio",
+      "warm-film",
+      "classic-bw"
+    ]
   },
   "defaults": {
     "headwear": "pink-bandana",

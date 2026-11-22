@@ -1,0 +1,71 @@
+{
+  "slug": "test-dummy",
+  "title": "Test-Dummy",
+  "titleKo": "",
+  "subtitle": "Custom Korean photo booth prompt pack. (test dummy)",
+  "format": "4-cut",
+  "formatLabel": "4-Cut Strip",
+  "formatLabelKo": "네컷",
+  "cuts": 4,
+  "tags": [
+    "Cute"
+  ],
+  "isNew": true,
+  "isSample": false,
+  "premium": false,
+  "previewImage": "/assets/packs/bunny-4cut/preview.png",
+  "previewWidth": 800,
+  "previewHeight": 1200,
+  "aspectClass": "strip-tall",
+  "requiredFiles": [
+    {
+      "id": "strip-template",
+      "label": "4-Cut Strip Guide",
+      "roleDescription": "4-cut strip layout frame guide",
+      "path": "/assets/packs/bunny-4cut/files/strip-template-4cut.png",
+      "filename": "strip-template-test-dummy.png"
+    }
+  ],
+  "allowed": {
+    "headwear": [
+      "bunny-ears",
+      "cream-beret",
+      "pink-bandana"
+    ],
+    "eyewear": [
+      "heart-glasses",
+      "star-glasses",
+      "round-glasses"
+    ],
+    "accessory": [
+      "bear-mittens",
+      "mini-bouquet"
+    ],
+    "backdrops": [
+      "baby-blue",
+      "strawberry-milk",
+      "butter-yellow",
+      "soft-lilac"
+    ],
+    "poses": [
+      "cute-classic",
+      "funny-playful",
+      "chic-editorial"
+    ],
+    "moods": [
+      "soft-studio",
+      "warm-film",
+      "dreamy-pastel",
+      "classic-bw"
+    ]
+  },
+  "defaults": {
+    "headwear": "bunny-ears",
+    "eyewear": null,
+    "accessory": null,
+    "backdrop": "baby-blue",
+    "pose": "cute-classic",
+    "mood": "soft-studio"
+  },
+  "template": "Create a realistic Korean photo booth strip.\n\nReference files attached:\n{attachments.list}\n\nIdentity & framing:\n- Keep the exact face, hair, and likeness of the person in Image 1 (my selfie).\n- Follow the layout proportions from {file.strip-template}.\n\nStyling & props:\n- {props.sentence}\n\nBackdrop & poses:\n- Background behind the subject: {backdrop.full}.\n- Poses: {pose.text}.\n\nLighting & finish:\n- {mood.text}."
+}

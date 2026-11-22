@@ -7,7 +7,11 @@
   "formatLabel": "4-Cut Strip",
   "formatLabelKo": "네컷",
   "cuts": 4,
-  "tags": ["Cute", "Classic", "Pastel"],
+  "tags": [
+    "Cute",
+    "Classic",
+    "Pastel"
+  ],
   "isNew": true,
   "isSample": true,
   "premium": false,
@@ -25,12 +29,40 @@
     }
   ],
   "allowed": {
-    "headwear": ["bunny-ears", "cream-beret", "pink-bandana"],
-    "eyewear": ["heart-glasses", "star-glasses", "round-glasses"],
-    "accessory": ["bear-mittens", "mini-bouquet"],
-    "backdrops": ["baby-blue", "strawberry-milk", "butter-yellow", "soft-lilac", "gingham-pink", "doodle-hearts"],
-    "poses": ["cute-classic", "funny-playful", "heart-overload", "chic-editorial"],
-    "moods": ["soft-studio", "dreamy-pastel", "warm-film", "classic-bw"]
+    "headwear": [
+      "bunny-ears",
+      "cream-beret",
+      "pink-bandana"
+    ],
+    "eyewear": [
+      "heart-glasses",
+      "star-glasses",
+      "round-glasses"
+    ],
+    "accessory": [
+      "bear-mittens",
+      "mini-bouquet"
+    ],
+    "backdrops": [
+      "baby-blue",
+      "strawberry-milk",
+      "butter-yellow",
+      "soft-lilac",
+      "gingham-pink",
+      "doodle-hearts"
+    ],
+    "poses": [
+      "cute-classic",
+      "funny-playful",
+      "heart-overload",
+      "chic-editorial"
+    ],
+    "moods": [
+      "soft-studio",
+      "dreamy-pastel",
+      "warm-film",
+      "classic-bw"
+    ]
   },
   "defaults": {
     "headwear": "bunny-ears",
