@@ -95,6 +95,7 @@
     min-height: 100dvh;
     background-color: var(--bg);
     color: var(--ink);
+    accent-color: var(--ink);
     display: flex;
     flex-direction: column;
     overflow-x: clip;
@@ -328,5 +329,97 @@ dialog::backdrop {
   [data-selected="true"] {
     outline: 2px solid Highlight;
     outline-offset: 2px;
+  }
+}
+
+/* Admin form controls & post-interaction validation per modern-web-guidance */
+.admin-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.55rem 0.85rem;
+  border-radius: 10px;
+  border: 2px solid var(--border-control);
+  background-color: var(--surface);
+  color: var(--ink);
+  font-size: 0.92rem;
+  line-height: 1.4;
+  transition: border-color 140ms ease, background-color 140ms ease;
+}
+
+.admin-input:hover {
+  border-color: var(--ink);
+}
+
+.admin-input:focus-visible {
+  border-color: var(--ink);
+}
+
+.field-error-msg {
+  display: none;
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--error-text);
+}
+
+:is(.admin-input:user-invalid, .admin-input.user-invalid-fallback) {
+  border-color: var(--error-text);
+  background-color: var(--error-bg);
+}
+
+:is(.admin-input:user-invalid, .admin-input.user-invalid-fallback) ~ .field-error-msg {
+  display: block;
+}
+
+/* Fallback checkbox styling when accent-color is unsupported */
+@supports not (accent-color: #1C1917) {
+  .admin-check-label {
+    position: relative;
+    padding-left: 1.85rem;
+  }
+
+  .admin-check-label > input[type="checkbox"] {
+    position: absolute;
+    clip-path: inset(50%);
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    white-space: nowrap;
+  }
+
+  .admin-check-label > span::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 2px solid var(--ink);
+    border-radius: 4px;
+    background-color: var(--surface);
+  }
+
+  .admin-check-label > input[type="checkbox"]:focus-visible + span::before {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  .admin-check-label > input[type="checkbox"]:checked + span::before {
+    background-color: var(--ink);
+  }
+
+  .admin-check-label > input[type="checkbox"]:checked + span::after {
+    content: "✓";
+    position: absolute;
+    left: 0.22rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #FFFFFF;
+    font-size: 0.85rem;
+    font-weight: 700;
   }
 }

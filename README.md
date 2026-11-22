@@ -1,32 +1,46 @@
 # Gamseong Photo Booth (감성네컷 Prompt Packs)
 
-Static Astro + React prompt pack library for Korean photo-booth images (Life4Cuts, Single Polaroid, Haru Film 2x2). Users customize visual options (props, pastel/wallpaper backdrops, pose packs, and film moods), reveal the compiled prompt, download a numbered reference file kit, and generate on their own free account in the Gemini app (`gemini.google.com`).
+Static Astro + React prompt pack library for Korean photo-booth images (Life4Cuts, Single Polaroid, Haru Film 2x2), plus an unlisted password-protected `/admin` studio backed by GitHub atomic commits on Vercel.
 
 ## Commands
 
 ```bash
 pnpm install
-pnpm run dev             # Local dev server
+pnpm run dev             # Local dev server (includes /admin in local-file dev mode)
 pnpm run validate:packs  # Verify all pack JSONs, asset paths, placeholders, and attachment limits
-pnpm run build           # Validate packs + build static site to dist/
+pnpm run build           # Validate packs + build for Vercel (static public pages + /admin API routes)
 pnpm run preview         # Preview built site locally
 ```
 
-## Adding or Replacing a Prompt Pack
+## Private Admin Studio (`/admin`)
 
-1. Drop your preview image and required template files into:
-   `public/assets/packs/<your-slug>/preview.png`
-   `public/assets/packs/<your-slug>/files/<template-file>.png`
-2. Create `content/packs/<your-slug>/pack.json` (copy `content/packs/bunny-4cut/pack.json` as a starting template).
-3. Update `isSample` to `false` once you replace a sample pack with real preview output.
-4. Run `pnpm run validate:packs` to verify all file paths, allowed option IDs, defaults, and placeholders.
-5. Push to Git: Vercel builds and deploys statically for free.
+Visit `/admin` directly (it is unlisted, blocked in `public/robots.txt`, and marked `noindex, nofollow`).
 
-## Swapping Shared Library Art
+Inside `/admin`, you can:
+- Add, edit, and delete **Prompt Packs**, replace **preview images**, manage **strip templates / required files**, configure allowed options & defaults, and edit **premade prompt templates** with clickable placeholder chips and a live compiled preview.
+- Add, edit, and delete **Shared Library** items (**Props**, **Backdrops**, **Poses**, **Moods**) with automatic image resizing and safe-delete checks.
+- Stage multiple edits and publish them as **one atomic GitHub commit** (1 Vercel deploy per publish).
 
-- Metadata lives in `content/library/{props,backdrops,poses,moods}.json`.
-- Images live in `public/assets/library/{props,backdrops,poses}/`.
-- Replace any PNG file with your own artwork of the same filename, or add new entries to the library JSON and reference their IDs in any pack's `allowed` list.
+### One-Time Vercel Environment Variable Setup
+
+In your Vercel Project Settings -> **Environment Variables**, add:
+
+| Variable | Description |
+|---|---|
+| `ADMIN_PASSWORD` | Your private admin password. |
+| `ADMIN_SESSION_SECRET` | Random 32+ character string used to sign the `HttpOnly` session cookie (e.g. `openssl rand -hex 32`). |
+| `GITHUB_TOKEN` | Fine-grained GitHub Personal Access Token scoped **only** to `synthfoundry-coder/gamseong-photo-booth` with **Contents: Read and write** permission. |
+
+Optional overrides if you rename or fork the repository:
+- `GITHUB_OWNER` (default: `synthfoundry-coder`)
+- `GITHUB_REPO` (default: `gamseong-photo-booth`)
+- `GITHUB_BRANCH` (default: `main`)
+
+### Local Testing Without a GitHub Token
+
+When running `pnpm run dev` locally without `ADMIN_PASSWORD` or `GITHUB_TOKEN`:
+- Default local dev password is `dev-admin` (or set `ADMIN_PASSWORD` in a local `.env` file).
+- Publishing saves directly to your local `content/` and `public/assets/` folders so you can test the entire workflow before deploying to Vercel.
 
 ## Optional Footer Support Link
 

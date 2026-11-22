@@ -1,0 +1,36 @@
+---
+import '../styles/global.css';
+import AdminApp from '../components/admin/AdminApp';
+
+export const prerender = false;
+---
+
+<!doctype html>
+<html lang="en" data-theme="yellow">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Studio · GAMSEONG PHOTO (감성네컷)</title>
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&display=swap"
+    />
+
+    <script is:inline>
+      try {
+        var saved = localStorage.getItem('gamseong.theme');
+        if (saved === 'yellow' || saved === 'pink' || saved === 'blue') {
+          document.documentElement.dataset.theme = saved;
+        }
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <AdminApp client:load />
+  </body>
+</html>
