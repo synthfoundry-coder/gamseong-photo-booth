@@ -1,0 +1,71 @@
+{
+  "slug": "newseasons",
+  "title": "Test Strip",
+  "titleKo": "",
+  "subtitle": "Custom Korean photo booth prompt pack.",
+  "format": "4-cut",
+  "formatLabel": "4-Cut Strip",
+  "formatLabelKo": "네컷",
+  "cuts": 4,
+  "tags": [
+    "Cute"
+  ],
+  "isNew": true,
+  "isSample": true,
+  "premium": true,
+  "previewImage": "/assets/packs/newseasons/preview.png",
+  "previewWidth": 533,
+  "previewHeight": 1600,
+  "aspectClass": "strip-tall",
+  "requiredFiles": [
+    {
+      "id": "transparent-cyan-photoism-frame-template",
+      "label": "Transparent Cyan Photoism Frame Template",
+      "roleDescription": "reference template or frame overlay",
+      "path": "/assets/packs/newseasons/files/transparent-cyan-photoism-frame-template.png",
+      "filename": "transparent-cyan-photoism-frame-template.png"
+    }
+  ],
+  "allowed": {
+    "headwear": [
+      "bunny-ears",
+      "cream-beret",
+      "pink-bandana"
+    ],
+    "eyewear": [
+      "heart-glasses",
+      "star-glasses",
+      "round-glasses"
+    ],
+    "accessory": [
+      "bear-mittens",
+      "mini-bouquet"
+    ],
+    "backdrops": [
+      "baby-blue",
+      "strawberry-milk",
+      "butter-yellow",
+      "soft-lilac"
+    ],
+    "poses": [
+      "cute-classic",
+      "funny-playful",
+      "chic-editorial"
+    ],
+    "moods": [
+      "soft-studio",
+      "warm-film",
+      "dreamy-pastel",
+      "classic-bw"
+    ]
+  },
+  "defaults": {
+    "headwear": "bunny-ears",
+    "eyewear": null,
+    "accessory": null,
+    "backdrop": "baby-blue",
+    "pose": "cute-classic",
+    "mood": "soft-studio"
+  },
+  "template": "Create a realistic Korean photo booth strip.\n\nReference files attached:\n{attachments.list}\n\nIdentity & framing:\n- Keep the exact face, hair, and likeness of the person in Image 1 (my selfie).\n- Follow the layout proportions from {file.Transparent Cyan Photoism Frame Template}.\n\nStyling & props:\n- {props.sentence}\n\nBackdrop & poses:\n- Background behind the subject: {backdrop.full}.\n- Poses: {pose.text}.\n\nLighting & finish:\n- {mood.text}."
+}
